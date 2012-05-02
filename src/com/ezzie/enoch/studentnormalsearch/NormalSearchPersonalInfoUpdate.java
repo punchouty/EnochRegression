@@ -14,6 +14,8 @@ import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 
 	private String parentWindow = null;
+	private String studentFirstName = "student_first_name";
+	private String studentLastName = "student_last_name";
 
 	@Before
 	public void setUp() throws Exception {
@@ -108,8 +110,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoFirstNameUpdateEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createString(0));
+		alphabetsEmpty(studentFirstName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -122,10 +123,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoLastNameUpdateEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Amelia");
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys(createString(0));
+		alphabetsMinLength(studentFirstName);
+		alphabetsEmpty(studentLastName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals("Please enter Last name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -138,10 +137,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoNameUpdateAlphabets() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createString(6));
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys(createString(6));
+		alphabetsMinLength(studentFirstName);
+		alphabetsMinLength(studentLastName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -158,8 +155,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoFirstNameUpdateAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createAlphaNum(1));
+		alphanumericsMinLength(studentFirstName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -175,10 +171,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoLastNameUpdateAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createString(4));
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys(createAlphaNum(1));
+		alphabetsMinLength(studentFirstName);
+		alphanumericsMinLength(studentLastName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -194,8 +188,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoFirstNameUpdateSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createSpecialChars(1));
+		specialCharMinLength(studentFirstName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -212,10 +205,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoLastNameUpdateSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createString(4));
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys(createSpecialChars(1));
+		alphabetsMinLength(studentFirstName);
+		specialCharMinLength(studentLastName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -232,9 +223,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoFirstNameUpdateMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(
-				createString(51));
+		alphabetMaxLength(studentFirstName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -251,11 +240,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoLastNameUpdateMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys(createString(4));
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys(
-				createString(51));
+		alphabetsMinLength(studentFirstName);
+		alphabetMaxLength(studentLastName);
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
@@ -273,8 +259,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	public void personalInfoChangeImmediateContact() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
 		driver.findElement(By.id("student_update_id")).click();
-		Thread.sleep(2000);
-		driver.findElement(By.xpath("(//input[@id='46'])[2]")).click();
+		Thread.sleep(1000);
 		driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
 	}
 
@@ -315,7 +300,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		driver.findElement(By.id("update_student")).click();
 		try {
 			assertEquals(
-					"Ameliapqr Jacksonpqr is sucessfully updated."
+					"Amelia Jackson is sucessfully updated."
 							.toUpperCase(),
 					driver.findElement(
 							By.cssSelector("ul.message.success > li"))

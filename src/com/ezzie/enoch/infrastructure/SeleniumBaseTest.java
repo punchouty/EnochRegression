@@ -200,7 +200,7 @@ public class SeleniumBaseTest {
 		driver.findElement(By.linkText("Student Search")).click();
 		driver.findElement(By.id("target")).clear();
 		driver.findElement(By.id("target")).sendKeys("elia");
-		driver.findElement(By.cssSelector("img.with-tip")).click();
+		driver.findElement(By.linkText("Amelia")).click();
 	}
 	
 	public void alphabetsEmpty(String alphabet){
