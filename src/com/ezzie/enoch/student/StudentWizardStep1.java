@@ -34,7 +34,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_admission_no")).clear();
-		driver.findElement(By.id("student_admission_no")).sendKeys("");
+		driver.findElement(By.id("student_admission_no")).sendKeys(createString(0));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("PLEASE ENTER FIRST NAME", driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -51,7 +51,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(0));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("PLEASE ENTER FIRST NAME", driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -67,7 +67,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(5));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("PLEASE ENTER LAST NAME", driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -83,7 +83,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal123");
+		driver.findElement(By.id("student_first_name")).sendKeys(createAlphaNum(2));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR FIRST NAME", driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -99,7 +99,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal123$");
+		driver.findElement(By.id("student_first_name")).sendKeys(createSpecialChars(2));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("Special Charcter are not allowed in First name and Admission No".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -117,7 +117,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		driver.findElement(By.id("student_first_name")).clear();
 		driver.findElement(By.id("student_first_name")).sendKeys(createString(51));
 		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("Handa");
+		driver.findElement(By.id("student_last_name")).sendKeys(createString(2));
 		Select course = new Select(driver.findElement(By.id("adv_search_course_id")));
 		course.selectByVisibleText("Nursery");
 		Thread.sleep(3000);
@@ -140,9 +140,9 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(2));
 		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("");
+		driver.findElement(By.id("student_last_name")).sendKeys(createString(0));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("Please Enter Last Name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -158,9 +158,9 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(2));
 		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("Handa");
+		driver.findElement(By.id("student_last_name")).sendKeys(createString(2));
 		driver.findElement(By.id("next_button")).click();
 		
 		try {
@@ -178,9 +178,9 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(2));
 		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("Handa123");
+		driver.findElement(By.id("student_last_name")).sendKeys(createAlphaNum(2));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR LAST NAME", driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -195,9 +195,9 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(2));
 		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("Handa123$");
+		driver.findElement(By.id("student_last_name")).sendKeys(createSpecialChars(2));
 		driver.findElement(By.id("next_button")).click();
 		try {
 			assertEquals("Please enter only characters for last name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -213,7 +213,7 @@ public class StudentWizardStep1 extends LoggedInUserTest{
 		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
 		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
+		driver.findElement(By.id("student_first_name")).sendKeys(createString(2));
 		driver.findElement(By.id("student_last_name")).clear();
 		driver.findElement(By.id("student_last_name")).sendKeys(createString(51));
 		Select course = new Select(driver.findElement(By.id("adv_search_course_id")));
