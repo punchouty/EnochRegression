@@ -31,7 +31,6 @@ public class StudentWizardStep3 extends LoggedInUserTest {
 	public void uploadImage() throws Exception {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
-		//driver.findElement(By.id("upload_image")).clear();
 		driver.findElement(By.id("upload_image"))
 				.sendKeys(
 						"C:\\Users\\Public\\Pictures\\Sample Pictures\\Android_Wallpaper_by_clondike7.png");

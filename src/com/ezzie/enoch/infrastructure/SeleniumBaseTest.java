@@ -17,6 +17,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -28,6 +29,12 @@ public class SeleniumBaseTest {
 	protected WebDriver driver;
 	protected String baseUrl;
 	protected StringBuffer verificationErrors = new StringBuffer();
+	private String firstNameStudent = "student_first_name";
+	private String lastNameStudent = "student_last_name";
+	private String addressStudent = "student_address_line1";
+	private String cityStudent = "student_city";
+	private String phoneStudent = "student_phone2";
+	
 
 	@BeforeClass
 	public static void loadConfiguration() {
@@ -126,31 +133,23 @@ public class SeleniumBaseTest {
 	public void switchTOStudentWizard2() throws Exception {
 		driver.findElement(By.cssSelector("#new_student > img.first-child"))
 				.click();
-		// ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp]]
-		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
 		driver.switchTo().window("Student Admission");
-		driver.findElement(By.id("student_first_name")).clear();
-		driver.findElement(By.id("student_first_name")).sendKeys("Vishal");
-		driver.findElement(By.id("student_last_name")).clear();
-		driver.findElement(By.id("student_last_name")).sendKeys("Handa");
+		alphabetsMinLength(firstNameStudent);
+		alphabetsMinLength(lastNameStudent);
 		Select course = new Select(driver.findElement(By
 				.id("adv_search_course_id")));
 		course.selectByVisibleText("Nursery");
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		Select batch = new Select(driver.findElement(By.id("student_batch_id")));
 		batch.selectByVisibleText("Nursery - A-2012");
-		Thread.sleep(3000);
+		Thread.sleep(1000);
 		driver.findElement(By.id("next_button")).click();
-		// Thread.sleep(2000);
-	}
+		}
 
 	public void switchToStudentWizard3() throws Exception {
-		driver.findElement(By.id("student_address_line1")).clear();
-		driver.findElement(By.id("student_address_line1")).sendKeys("abcd");
-		driver.findElement(By.id("student_city")).clear();
-		driver.findElement(By.id("student_city")).sendKeys("abcd");
-		driver.findElement(By.id("student_phone2")).clear();
-		driver.findElement(By.id("student_phone2")).sendKeys("9999999999");
+		alphabetsMinLength(addressStudent);
+		alphabetsMinLength(cityStudent);
+		numberMaxLength(phoneStudent);
 		driver.findElement(By.id("wizard_next_button")).click();
 		try {
 			assertTrue(isElementPresent(By.cssSelector("span.status-ok")));
@@ -202,5 +201,57 @@ public class SeleniumBaseTest {
 		driver.findElement(By.id("target")).clear();
 		driver.findElement(By.id("target")).sendKeys("elia");
 		driver.findElement(By.cssSelector("img.with-tip")).click();
+	}
+	
+	public void alphabetsEmpty(String alphabet){
+		driver.findElement(By.id(alphabet)).clear();
+		driver.findElement(By.id(alphabet)).sendKeys(createString(0));
+	}
+	
+	public void alphabetsMinLength(String alphabet){
+		driver.findElement(By.id(alphabet)).clear();
+		driver.findElement(By.id(alphabet)).sendKeys(createString(1));
+	}
+	
+	public void alphabetMaxLength(String alphabet){
+		driver.findElement(By.id(alphabet)).clear();
+		driver.findElement(By.id(alphabet)).sendKeys(createString(51));
+	}
+	
+	public void alphanumericsEmpty(String alphanumerics){
+		driver.findElement(By.id(alphanumerics)).clear();
+		driver.findElement(By.id(alphanumerics)).sendKeys(createAlphaNum(0));
+	}
+	
+	public void alphanumericsMinLength(String alphanumerics){
+		driver.findElement(By.id(alphanumerics)).clear();
+		driver.findElement(By.id(alphanumerics)).sendKeys(createAlphaNum(1));
+	}
+	
+	public void alphanumericsMaxLength(String alphanumerics){
+		driver.findElement(By.id(alphanumerics)).clear();
+		driver.findElement(By.id(alphanumerics)).sendKeys(createAlphaNum(51));
+	}
+
+	public void specialCharMinLength(String specialChars){
+		driver.findElement(By.id(specialChars)).clear();
+		driver.findElement(By.id(specialChars)).sendKeys(createSpecialChars(1));
+	}
+	
+
+	public void numberMinLength(String number){
+		driver.findElement(By.id(number)).clear();
+		driver.findElement(By.id(number)).sendKeys(createNumber(0));
+	}
+	
+
+	public void numberMaxLength(String number){
+		driver.findElement(By.id(number)).clear();
+		driver.findElement(By.id(number)).sendKeys(createNumber(10));
+	}
+	
+	public void number11Length(String number){
+		driver.findElement(By.id(number)).clear();
+		driver.findElement(By.id(number)).sendKeys(createNumber(11));
 	}
 }

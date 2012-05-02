@@ -13,6 +13,7 @@ import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 public class StudentWizardStep5 extends LoggedInUserTest {
 
 	private String parentWindow = null;
+	private String guardianFirstName = "guardian_first_name";
 
 	@Before
 	public void setUp() throws Exception {
@@ -32,9 +33,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(0));
-		Thread.sleep(3000);
+		alphabetsEmpty(guardianFirstName);
+		Thread.sleep(500);
 		driver.findElement(By.id("save_guardian")).click();
 		String message = driver.findElement(
 				By.cssSelector("ul.message.warning  > li")).getText();
@@ -52,9 +52,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(2));
-		Thread.sleep(3000);
+		alphabetsMinLength(guardianFirstName);
+		Thread.sleep(500);
 		driver.findElement(By.id("save_guardian")).click();
 	}
 
@@ -63,9 +62,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createAlphaNum(2));
-		Thread.sleep(3000);
+		alphanumericsMinLength(guardianFirstName);
+		Thread.sleep(500);
 		driver.findElement(By.id("save_guardian")).click();
 		try {
 			assertEquals(
@@ -84,9 +82,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createSpecialChars(2));
-		Thread.sleep(3000);
+		specialCharMinLength(guardianFirstName);
+		Thread.sleep(500);
 		driver.findElement(By.id("save_guardian")).click();
 		try {
 			assertEquals(
@@ -105,9 +102,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(
-				createString(51));
+		alphabetMaxLength(guardianFirstName);
 		driver.findElement(By.id("save_guardian")).click();
 		Thread.sleep(3000);
 		try {
@@ -128,9 +123,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5WithImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(0));
-		Thread.sleep(3000);
+		alphabetsEmpty(guardianFirstName);
+		Thread.sleep(200);
 		driver.findElement(By.id("save_guardian")).click();
 		String message = driver.findElement(
 				By.cssSelector("ul.message.warning  > li")).getText();
@@ -148,9 +142,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5WithImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(2));
-		Thread.sleep(3000);
+		alphabetsMinLength(guardianFirstName);
+		Thread.sleep(200);
 		driver.findElement(By.id("save_guardian")).click();
 	}
 
@@ -159,12 +152,11 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(2));
-		Thread.sleep(2000);
+		alphabetsMinLength(guardianFirstName);
+		Thread.sleep(200);
 		Select select = new Select(driver.findElement(By.id("relation")));
 		select.selectByVisibleText("Mother");
-		Thread.sleep(2000);
+		Thread.sleep(200);
 	}
 
 	@Test
@@ -172,9 +164,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5WithImage();
-		driver.findElement(By.id("guardian_first_name")).clear();
-		driver.findElement(By.id("guardian_first_name")).sendKeys(createString(2));
-		Thread.sleep(2000);
+		alphabetsMinLength(guardianFirstName);
+		Thread.sleep(1000);
 		Select select = new Select(driver.findElement(By.id("relation")));
 		select.selectByVisibleText("Mother");
 		Thread.sleep(2000);
