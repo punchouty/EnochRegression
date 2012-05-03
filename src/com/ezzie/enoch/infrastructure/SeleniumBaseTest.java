@@ -166,9 +166,8 @@ public class SeleniumBaseTest {
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
-		String message = driver.findElement(By.cssSelector("ul.message.warning  > li")).getText();
 		try {
-			assertEquals("Student successfully created".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+			assertEquals("Student successfully created.please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
@@ -179,7 +178,7 @@ public class SeleniumBaseTest {
 		driver.findElement(By.id("upload_image")).sendKeys("C:\\Users\\Public\\Pictures\\Sample Pictures\\andesk.png");
 		driver.findElement(By.id("wizard_next_button")).click();
 		try {
-			assertEquals("Student succesfully updated".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+			assertEquals("Student succesfully updated. Please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}

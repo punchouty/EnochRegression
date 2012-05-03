@@ -34,12 +34,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		try {
-			assertEquals("Student successfully created.please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
 		findElementById(saveGuardian);
+		Thread.sleep(500);
 		try {
 			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -126,8 +122,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		alphabetsEmpty(guardianFirstName);
 		Thread.sleep(200);
 		findElementById(saveGuardian);
-		String message = driver.findElement(
-				By.cssSelector("ul.message.warning  > li")).getText();
+		Thread.sleep(500);
 		try {
 			assertEquals("Please enter first name".toUpperCase(), driver
 					.findElement(By.cssSelector("ul.message.warning  > li"))
