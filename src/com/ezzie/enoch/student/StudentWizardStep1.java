@@ -17,7 +17,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 	private String parentWindow = null;
 	private String studentFirstName = "student_first_name";
 	private String studentLastName = "student_last_name";
-
+	private String firstChild = "#new_student > img.first-child";
+	private String nextButton = "next_button";
+	private String admissionNo = "student_admission_no";
+	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -33,15 +36,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void admissionNoEmpty() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
-		// ERROR: Caught exception [ERROR: Unsupported command [waitForPopUp]]
-		// ERROR: Caught exception [ERROR: Unsupported command [selectWindow]]
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
-		driver.findElement(By.id("student_admission_no")).clear();
-		driver.findElement(By.id("student_admission_no")).sendKeys(
-				createString(0));
-		driver.findElement(By.id("next_button")).click();
+		alphabetsEmpty(admissionNo);
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"PLEASE ENTER FIRST NAME",
@@ -55,11 +53,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void firstNameEmpty() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsEmpty(studentFirstName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"PLEASE ENTER FIRST NAME",
@@ -73,11 +70,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void firstNameAlphabets() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"PLEASE ENTER LAST NAME",
@@ -91,11 +87,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void firstNameAlphanumerics() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphanumericsMinLength(studentFirstName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR FIRST NAME", driver
 					.findElement(By.cssSelector("ul.message.warning > li"))
@@ -107,11 +102,10 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void firstNameSpecialCharacters() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		specialCharMinLength(studentFirstName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"Special Charcter are not allowed in First name and Admission No"
@@ -126,19 +120,18 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void firstNameFieldMaxLength() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetMaxLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		Select course = new Select(driver.findElement(By
 				.id("adv_search_course_id")));
 		course.selectByVisibleText("Nursery");
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		Select batch = new Select(driver.findElement(By.id("student_batch_id")));
-		batch.selectByVisibleText("Nursery - A-2012");
-		Thread.sleep(3000);
-		driver.findElement(By.id("next_button")).click();
+		batch.selectByVisibleText("Nursery - A");
+		Thread.sleep(2000);
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"You can not enter more than 50 character in field"
@@ -153,12 +146,11 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameEmpty() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals("Please Enter Last Name".toUpperCase(), driver
 					.findElement(By.cssSelector("ul.message.warning > li"))
@@ -170,12 +162,11 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameAlphabets() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"PLEASE SELECT BATCH",
@@ -189,12 +180,11 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameAlphanumerics() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR LAST NAME", driver
 					.findElement(By.cssSelector("ul.message.warning > li"))
@@ -206,12 +196,11 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameSpecialCharacters() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
-		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"Please enter only characters for last name".toUpperCase(),
@@ -225,19 +214,18 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameFieldMaxLength() throws Exception {
-		driver.findElement(By.cssSelector("#new_student > img.first-child"))
-				.click();
+		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		alphabetMaxLength(studentLastName);
 		Select course = new Select(driver.findElement(By
 				.id("adv_search_course_id")));
 		course.selectByVisibleText("Nursery");
-		Thread.sleep(3000);
+		Thread.sleep(2000);
 		Select batch = new Select(driver.findElement(By.id("student_batch_id")));
-		batch.selectByVisibleText("Nursery - A-2012");
-		Thread.sleep(3000);
-		driver.findElement(By.id("next_button")).click();
+		batch.selectByVisibleText("Nursery - A");
+		Thread.sleep(2000);
+		findElementById(nextButton);
 		try {
 			assertEquals(
 					"You can not enter more than 50 character in field"

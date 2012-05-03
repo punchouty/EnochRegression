@@ -15,6 +15,8 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	private String studentAddress= "student_address_line1";
 	private String studentCity = "student_city";
 	private String studentPhone = "student_phone2";
+	private String contact = "Contacts";
+	private String update = "update_contact";
 
 	@Before
 	public void setUp() throws Exception {
@@ -32,9 +34,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateLine1Empty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetsEmpty(studentAddress);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter Address Line 1".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -46,9 +48,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateLine1Aplhanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetsMinLength(studentAddress);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Amelia Jackson is sucessfully updated.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.success > li")).getText());
 		} catch (Error e) {
@@ -60,9 +62,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateLine1SpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		specialCharMinLength(studentAddress);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("The text field has special characters. These are not allowed.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -73,9 +75,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateLine1MaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetMaxLength(studentAddress);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("You can not enter more than 50 character in field".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -86,9 +88,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateCityEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetsEmpty(studentCity);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter City".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -99,10 +101,10 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateCityAlphabets() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetsMinLength(studentAddress);
 		alphabetsMinLength(studentCity);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Amelia Jackson is sucessfully updated.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.success > li")).getText());
 		} catch (Error e) {
@@ -113,10 +115,10 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateCityAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphanumericsMinLength(studentAddress);
 		alphanumericsMinLength(studentCity);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter characters for City".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -127,10 +129,10 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateCitySpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphanumericsMinLength(studentAddress);
 		specialCharMinLength(studentCity);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter characters for City".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -141,9 +143,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		numberMinLength(studentPhone);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter Mobile Number".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -154,9 +156,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileNumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		numberMaxLength(studentPhone);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Amelia Jackson is sucessfully updated.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.success > li")).getText());
 		} catch (Error e) {
@@ -168,7 +170,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileAlphabets() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphabetsMinLength(studentPhone);
 		try {
 			assertEquals("Please enter a numeric value".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -180,7 +182,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		alphanumericsMinLength(studentPhone);
 		try {
 			assertEquals("Please enter a numeric value".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -192,7 +194,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		specialCharMinLength(studentPhone);
 		try {
 			assertEquals("Please enter a numeric value".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
@@ -204,9 +206,9 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	@Test
 	public void contactsUpdateMobileMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.linkText("Contacts")).click();
+		findElementLinkText(contact);
 		number11Length(studentPhone);
-		driver.findElement(By.id("update_contact")).click();
+		findElementById(update);
 		try {
 			assertEquals("Mobile Number must be 10 Digit long".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {

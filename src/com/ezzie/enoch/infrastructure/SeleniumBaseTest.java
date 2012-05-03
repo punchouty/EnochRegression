@@ -101,7 +101,7 @@ public class SeleniumBaseTest {
 	protected String createString(int length) {
 		StringBuilder builder = new StringBuilder();
 		for (int i = 0; i < length; i++) {
-			builder.append('a');
+			builder.append("Amelia");
 		}
 		return builder.toString();
 	}
@@ -141,7 +141,7 @@ public class SeleniumBaseTest {
 		course.selectByVisibleText("Nursery");
 		Thread.sleep(1000);
 		Select batch = new Select(driver.findElement(By.id("student_batch_id")));
-		batch.selectByVisibleText("Nursery - A-2012");
+		batch.selectByVisibleText("Nursery - A");
 		Thread.sleep(1000);
 		driver.findElement(By.id("next_button")).click();
 		}
@@ -253,5 +253,46 @@ public class SeleniumBaseTest {
 	public void number11Length(String number){
 		driver.findElement(By.id(number)).clear();
 		driver.findElement(By.id(number)).sendKeys(createNumber(11));
+	}
+	
+	public void alphabetsMinLinkText(String alphabet){
+		driver.findElement(By.xpath(alphabet)).clear();
+		driver.findElement(By.xpath(alphabet)).sendKeys(createString(1));
+	}
+	
+	public void alphabetsEmptyLinkText(String alphabet){
+		driver.findElement(By.xpath(alphabet)).clear();
+		driver.findElement(By.xpath(alphabet)).sendKeys(createString(0));
+	}
+	
+	public void alphanumericsLinkText(String alphabet){
+		driver.findElement(By.xpath(alphabet)).clear();
+		driver.findElement(By.xpath(alphabet)).sendKeys(createAlphaNum(1));
+	}
+	
+	public void specialCharsLinkText(String alphabet){
+		driver.findElement(By.xpath(alphabet)).clear();
+		driver.findElement(By.xpath(alphabet)).sendKeys(createSpecialChars(1));
+	}
+	
+	public void maxLengthLinkText(String alphabet){
+		driver.findElement(By.xpath(alphabet)).clear();
+		driver.findElement(By.xpath(alphabet)).sendKeys(createString(51));
+	}
+	
+	public void findElementLinkText(String alphabet){
+		driver.findElement(By.linkText(alphabet)).click();
+	}
+	
+	public void findElementById(String alphabet){
+		driver.findElement(By.id(alphabet)).click();
+	}
+	
+	public void findElementCSSSelector(String alphabet){
+		driver.findElement(By.cssSelector(alphabet)).click();
+	}
+	
+	public void findElementXPath(String alphabet){
+		driver.findElement(By.xpath(alphabet)).click();
 	}
 }

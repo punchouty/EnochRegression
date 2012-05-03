@@ -16,6 +16,11 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	private String parentWindow = null;
 	private String studentFirstName = "student_first_name";
 	private String studentLastName = "student_last_name";
+	private String update = "update_student";
+	private String xpathButton = "(//button[@type='button'])[2]";
+	private String studentImage = "student_image";
+	private String updateId = "student_update_id";
+	private String cropImage = "Crop_image";
 
 	@Before
 	public void setUp() throws Exception {
@@ -111,7 +116,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	public void personalInfoFirstNameUpdateEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsEmpty(studentFirstName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -125,7 +130,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals("Please enter Last name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
@@ -139,10 +144,10 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
-					"Ameliapqr Jacksonpqr is sucessfully updated."
+					"Amelia Amelia is sucessfully updated."
 							.toUpperCase(),
 					driver.findElement(
 							By.cssSelector("ul.message.success > li"))
@@ -156,7 +161,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	public void personalInfoFirstNameUpdateAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
 		alphanumericsMinLength(studentFirstName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"Please enter characters for First Name".toUpperCase(),
@@ -173,7 +178,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"Please enter characters for Last Name".toUpperCase(),
@@ -189,7 +194,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	public void personalInfoFirstNameUpdateSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
 		specialCharMinLength(studentFirstName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"The text field has special characters. These are not allowed."
@@ -207,7 +212,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"The text field has special characters. These are not allowed."
@@ -224,7 +229,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	public void personalInfoFirstNameUpdateMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetMaxLength(studentFirstName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"You can not enter more than 50 character in field"
@@ -242,7 +247,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsMinLength(studentFirstName);
 		alphabetMaxLength(studentLastName);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
 					"You can not enter more than 50 character in field"
@@ -258,10 +263,10 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoChangeImmediateContact() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_update_id")).click();
-		Thread.sleep(1000);
-		driver.findElement(By.xpath("(//button[@type='button'])[2]")).click();
-	}
+		findElementById(updateId);
+		Thread.sleep(500);
+		findElementXPath(xpathButton);
+		}
 
 	@Test
 	public void personalInfoUpdateDropdown() throws Exception {
@@ -269,15 +274,15 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		Select category1 = new Select(driver.findElement(By
 				.id("student_student_category_id")));
 		category1.selectByVisibleText("General");
-		Thread.sleep(1000);
+		Thread.sleep(500);
 		Select category2 = new Select(driver.findElement(By
 				.id("student_religion")));
 		category2.selectByVisibleText("Other");
-		Thread.sleep(1000);
-		driver.findElement(By.id("update_student")).click();
+		Thread.sleep(500);
+		findElementById(update);
 		try {
 			assertEquals(
-					"Amelia Jackson is sucessfully updated.".toUpperCase(),
+					"Amelia Amelia is sucessfully updated.".toUpperCase(),
 					driver.findElement(
 							By.cssSelector("ul.message.success > li"))
 							.getText());
@@ -289,18 +294,18 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	@Test
 	public void personalInfoUpdateImage() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
-		driver.findElement(By.id("student_image")).click();
+		findElementById(studentImage);
 		driver.switchTo().window("Change Image");
 		driver.findElement(By.id("student_student_photo"))
 				.sendKeys(
 						"C:\\Users\\Public\\Pictures\\Sample Pictures\\Android_Wallpaper_by_clondike7.png");
 		driver.findElement(By.name("commit")).click();
-		driver.findElement(By.id("Crop_image")).click();
+		findElementById(cropImage);
 		driver.switchTo().window(parentWindow);
-		driver.findElement(By.id("update_student")).click();
+		findElementById(update);
 		try {
 			assertEquals(
-					"Amelia Jackson is sucessfully updated."
+					"Amelia Amelia is sucessfully updated."
 							.toUpperCase(),
 					driver.findElement(
 							By.cssSelector("ul.message.success > li"))

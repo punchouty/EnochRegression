@@ -13,6 +13,7 @@ import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 public class StudentWizardStep3 extends LoggedInUserTest {
 
 	private String parentWindow = null;
+	private String nextButton = "wizard_next_button";
 
 	@Before
 	public void setUp() throws Exception {
@@ -27,54 +28,37 @@ public class StudentWizardStep3 extends LoggedInUserTest {
 		super.tearDown();
 	}
 
-	@Test
-	public void uploadImage() throws Exception {
-		switchTOStudentWizard2();
-		switchToStudentWizard3();
-		driver.findElement(By.id("upload_image"))
-				.sendKeys(
-						"C:\\Users\\Public\\Pictures\\Sample Pictures\\Android_Wallpaper_by_clondike7.png");
-		driver.findElement(By.id("wizard_next_button")).click();
-		try {
-			assertEquals(
-					"Student succesfully updated".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning  > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
-	}
 	
 	@Test
 	public void testBlankImage() throws Exception {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
-		driver.findElement(By.id("wizard_next_button")).click();
+		findElementById(nextButton);
 		try {
 			assertTrue(isElementPresent(By.cssSelector("span.status-ok")));
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
-		String message = driver.findElement(By.cssSelector("ul.message.warning  > li")).getText();
+		String message = driver.findElement(
+				By.cssSelector("ul.message.warning  > li")).getText();
 		try {
-			assertEquals("Student successfully created".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+			assertEquals("Student successfully created.please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
 
 	}
-	
+
 	@Test
 	public void testCropImage() throws Exception {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
-		//driver.findElement(By.id("upload_image")).clear();
-		driver.findElement(By.id("upload_image")).sendKeys("C:\\Users\\Public\\Pictures\\Sample Pictures\\andesk.png");
+		// driver.findElement(By.id("upload_image")).clear();
+		driver.findElement(By.id("upload_image")).sendKeys(
+				"C:\\Users\\Public\\Pictures\\Sample Pictures\\andesk.png");
 		driver.findElement(By.id("wizard_next_button")).click();
 		try {
-			assertEquals("Student succesfully updated".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+			assertEquals("Student succesfully updated. Please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
@@ -83,11 +67,13 @@ public class StudentWizardStep3 extends LoggedInUserTest {
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
-		driver.findElement(By.id("wizard_next_button")).click();
+		findElementById(nextButton);
 		try {
-			assertEquals("Successfully updated user.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+			assertEquals("Successfully updated user.".toUpperCase(), driver
+					.findElement(By.cssSelector("ul.message.warning  > li"))
+					.getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
-}
+	}
 }

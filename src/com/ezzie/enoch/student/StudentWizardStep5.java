@@ -14,6 +14,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String guardianFirstName = "guardian_first_name";
+	private String saveGuardian = "save_guardian";
 
 	@Before
 	public void setUp() throws Exception {
@@ -33,15 +34,14 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
-		alphabetsEmpty(guardianFirstName);
-		Thread.sleep(500);
-		driver.findElement(By.id("save_guardian")).click();
-		String message = driver.findElement(
-				By.cssSelector("ul.message.warning  > li")).getText();
 		try {
-			assertEquals("Please enter first name".toUpperCase(), driver
-					.findElement(By.cssSelector("ul.message.warning  > li"))
-					.getText());
+			assertEquals("Student successfully created.please check mail.".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning  > li")).getText());
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+		}
+		findElementById(saveGuardian);
+		try {
+			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
@@ -54,7 +54,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5BlankImage();
 		alphabetsMinLength(guardianFirstName);
 		Thread.sleep(500);
-		driver.findElement(By.id("save_guardian")).click();
+		findElementById(saveGuardian);
 	}
 
 	@Test
@@ -63,8 +63,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
 		alphanumericsMinLength(guardianFirstName);
-		Thread.sleep(500);
-		driver.findElement(By.id("save_guardian")).click();
+		Thread.sleep(5000);
+		findElementById(saveGuardian);
 		try {
 			assertEquals(
 					"Please enter characters for guardian first name"
@@ -84,7 +84,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5BlankImage();
 		specialCharMinLength(guardianFirstName);
 		Thread.sleep(500);
-		driver.findElement(By.id("save_guardian")).click();
+		findElementById(saveGuardian);
 		try {
 			assertEquals(
 					"Please enter characters for guardian first name"
@@ -103,7 +103,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard3();
 		switchToStudentWizard5BlankImage();
 		alphabetMaxLength(guardianFirstName);
-		driver.findElement(By.id("save_guardian")).click();
+		findElementById(saveGuardian);
 		Thread.sleep(3000);
 		try {
 			assertEquals(
@@ -125,7 +125,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5WithImage();
 		alphabetsEmpty(guardianFirstName);
 		Thread.sleep(200);
-		driver.findElement(By.id("save_guardian")).click();
+		findElementById(saveGuardian);
 		String message = driver.findElement(
 				By.cssSelector("ul.message.warning  > li")).getText();
 		try {
@@ -144,7 +144,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5WithImage();
 		alphabetsMinLength(guardianFirstName);
 		Thread.sleep(200);
-		driver.findElement(By.id("save_guardian")).click();
+		findElementById(saveGuardian);
 	}
 
 	@Test
