@@ -36,11 +36,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5BlankImage();
 		findElementById(saveGuardian);
 		Thread.sleep(500);
-		try {
-			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterFirstName();
 	}
 
 	@Test
@@ -61,16 +57,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		alphanumericsMinLength(guardianFirstName);
 		Thread.sleep(5000);
 		findElementById(saveGuardian);
-		try {
-			assertEquals(
-					"Please enter characters for guardian first name"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyGuardianFirstName();
 	}
 
 	@Test
@@ -81,16 +68,7 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		specialCharMinLength(guardianFirstName);
 		Thread.sleep(500);
 		findElementById(saveGuardian);
-		try {
-			assertEquals(
-					"Please enter characters for guardian first name"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyGuardianFirstName();
 	}
 
 	@Test
@@ -100,18 +78,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5BlankImage();
 		alphabetMaxLength(guardianFirstName);
 		findElementById(saveGuardian);
-		Thread.sleep(3000);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-			Thread.sleep(3000);
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		Thread.sleep(1000);
+		verifyMaxLength();
 	}
 
 	@Test
@@ -122,14 +90,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		alphabetsEmpty(guardianFirstName);
 		Thread.sleep(200);
 		findElementById(saveGuardian);
-		Thread.sleep(500);
-		try {
-			assertEquals("Please enter first name".toUpperCase(), driver
-					.findElement(By.cssSelector("ul.message.warning  > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		Thread.sleep(1000);
+		verifyEnterFirstName();
 	}
 
 	@Test

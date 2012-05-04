@@ -1,4 +1,4 @@
-package com.ezzie.enoch.studentnormalsearch;
+package com.ezzie.enoch.studentadvancedsearch;
 
 import static org.junit.Assert.assertEquals;
 
@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 
-public class NormalSearchGuardianUpdate extends LoggedInUserTest {
+public class AdvancedSearchGuardian extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String firstName = "first_name6";
@@ -36,7 +36,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 
 	@Test
 	public void firstNameEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		alphabetsEmpty(firstName);
 		findElementById(update);
@@ -45,7 +45,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void firstNameAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		alphabetsMinLength(firstName);
 		new Select(driver.findElement(By.id("relation6"))).selectByVisibleText("Father");
@@ -56,7 +56,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void firstNameAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		alphanumericsMinLength(firstName);
 		findElementById(update);
@@ -65,7 +65,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void firstNameSpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		specialCharMinLength(firstName);
 		findElementById(update);
@@ -74,7 +74,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void firstNameMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		alphabetMaxLength(firstName);
 		findElementById(update);
@@ -84,7 +84,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 
 	@Test
 	public void addOneMoreGuardian() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphabetsMinLinkText(xPath);
@@ -94,7 +94,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 
 	@Test
 	public void newGuardianFirstNameEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphabetsEmptyLinkText(xPath);
@@ -104,7 +104,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void newGuardianFirstNameAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphanumericsLinkText(xPath);
@@ -114,7 +114,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void newGuardianFirstNameSpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		specialCharsLinkText(xPath);
@@ -124,7 +124,7 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void newGuardianFirstNameMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		maxLengthLinkText(xPath);

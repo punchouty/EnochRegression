@@ -57,6 +57,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		driver.findElement(By.linkText("Student Search")).click();
 		driver.findElement(By.id("target")).clear();
 		driver.findElement(By.id("target")).sendKeys("elia");
+		Thread.sleep(1000);
 		driver.findElement(By.cssSelector("img.with-tip")).click();
 		try {
 			assertTrue(isElementPresent(By.id("changeStudentName")));
@@ -117,12 +118,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsEmpty(studentFirstName);
 		findElementById(update);
-		try {
-			assertEquals("Please enter First name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-		
+		verifyEnterFirstName();
 	}
 	
 	@Test
@@ -131,12 +127,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
 		findElementById(update);
-		try {
-			assertEquals("Please enter Last name".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-		
+		verifyEnterLastName();
 	}
 
 	@Test
@@ -145,16 +136,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"Amelia Amelia is sucessfully updated."
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.success > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifySuccessfullyUpdated();
+		verifySuccessfullyUpdated();
 	}
 	
 	@Test
@@ -162,15 +145,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphanumericsMinLength(studentFirstName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"Please enter characters for First Name".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterCharactersFirstName();
 	}
 
 	@Test
@@ -179,15 +154,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"Please enter characters for Last Name".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterCharactersLastName();
 	}
 
 	@Test
@@ -195,16 +162,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		specialCharMinLength(studentFirstName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"The text field has special characters. These are not allowed."
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifySpecialChars();
 	}
 
 	@Test
@@ -213,16 +171,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"The text field has special characters. These are not allowed."
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifySpecialChars();
 	}
 
 	@Test
@@ -230,16 +179,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetMaxLength(studentFirstName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyMaxLength();
 	}
 
 	@Test
@@ -248,16 +188,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetMaxLength(studentLastName);
 		findElementById(update);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyMaxLength();
 	}
 
 	@Test
@@ -280,15 +211,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		category2.selectByVisibleText("Other");
 		Thread.sleep(500);
 		findElementById(update);
-		try {
-			assertEquals(
-					"Amelia Amelia is sucessfully updated.".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.success > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifySuccessfullyUpdated();
 	}
 
 	@Test
@@ -303,15 +226,6 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		findElementById(cropImage);
 		driver.switchTo().window(parentWindow);
 		findElementById(update);
-		try {
-			assertEquals(
-					"Amelia Amelia is sucessfully updated."
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.success > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifySuccessfullyUpdated();
 	}
 }

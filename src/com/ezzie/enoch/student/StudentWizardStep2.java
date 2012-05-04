@@ -36,14 +36,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 	public void addressLine1Empty() throws Exception {
 		switchTOStudentWizard2();
 		findElementById(nextButton);
-		try {
-			assertEquals("Please enter Address".toUpperCase(), driver
-					.findElement(By.cssSelector("ul.message.warning > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyEnterAddress();
 	}
 
 	@Test
@@ -51,16 +44,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetsMinLength(studentAddress);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter City".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyEnterCity();
 	}
 
 	@Test
@@ -68,16 +52,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphanumericsMinLength(studentAddress);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter City".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyEnterCity();
 	}
 
 	@Test
@@ -85,17 +60,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		specialCharMinLength(studentAddress);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"The text field has special characters. These are not allowed."
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifySpecialChars();
 	}
 
 	@Test
@@ -103,17 +68,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetMaxLength(studentAddress);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyMaxLength();
 	}
 
 	@Test
@@ -121,16 +76,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetsMinLength(studentAddress);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter City".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyEnterCity();
 	}
 
 	@Test
@@ -139,15 +85,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphabetsMinLength(city);
 		findElementById(nextButton);
-		try {
-			assertEquals("Please enter Mobile no.".toUpperCase(), driver
-					.findElement(By.cssSelector("ul.message.warning > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
+		verifyEnterMobileNoDot();
 		}
-
-	}
 
 	@Test
 	public void cityAlphanumerics() throws Exception {
@@ -155,16 +94,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphanumericsMinLength(city);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter only characters for City".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyOnlyCharsCity();
 	}
 
 	@Test
@@ -173,16 +103,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		specialCharMinLength(city);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter only characters for City".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyOnlyCharsCity();
 	}
 
 	@Test
@@ -191,19 +112,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphabetMaxLength(city);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
-
+		verifyMaxLength();
 	}
-	
+
 	@Test
 	public void mobileEmpty() throws Exception {
 		switchTOStudentWizard2();
@@ -211,17 +122,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		numberMinLength(studentPhone);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter mobile no.".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterMobileNoDot();
 	}
-	
+
 	@Test
 	public void mobileNumerics() throws Exception {
 		switchTOStudentWizard2();
@@ -243,17 +146,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		alphabetsMinLength(studentPhone);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Mobile Number must be 10 Digit long".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		mobileNoTenDigit();
 	}
-	
+
 	@Test
 	public void mobileAlphanumerics() throws Exception {
 		switchTOStudentWizard2();
@@ -261,17 +156,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		alphanumericsMinLength(studentPhone);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Mobile Number must be 10 Digit long".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		mobileNoTenDigit();
 	}
-	
 
 	@Test
 	public void mobileSpecialCharacters() throws Exception {
@@ -280,17 +166,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		specialCharMinLength(studentPhone);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Mobile Number must be 10 Digit long".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		mobileNoTenDigit();
 	}
-	
+
 	@Test
 	public void mobileMaxLength() throws Exception {
 		switchTOStudentWizard2();
@@ -298,15 +176,6 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		number11Length(studentPhone);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Mobile Number must be 10 Digit long".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		mobileNoTenDigit();
 	}
-
 }

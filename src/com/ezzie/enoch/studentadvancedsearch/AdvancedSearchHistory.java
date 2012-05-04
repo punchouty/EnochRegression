@@ -1,4 +1,4 @@
-package com.ezzie.enoch.studentnormalsearch;
+package com.ezzie.enoch.studentadvancedsearch;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 
-public class NormalSearchHistoryUpdate extends LoggedInUserTest {
+public class AdvancedSearchHistory extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String history = "History";
@@ -31,7 +31,7 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 
 	@Test
 	public void instituitionNameEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(history);
 		alphabetsEmpty(previousInst);
 		findElementById(updateStudent);
@@ -40,16 +40,17 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void instituitionNameAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(history);
 		alphabetsMinLength(previousInst);
 		findElementById(updateStudent);
 		previousSuccessfullyUpdated();
 	}
 	
+
 	@Test
 	public void instituitionNameAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(history);
 		alphanumericsMinLength(previousInst);
 		findElementById(updateStudent);
@@ -59,7 +60,7 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 
 	@Test
 	public void instituitionNameSpecialchars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(history);
 		specialCharMinLength(previousInst);
 		findElementById(updateStudent);
@@ -69,7 +70,7 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 
 	@Test
 	public void instituitionNameMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(history);
 		alphabetMaxLength(previousInst);
 		findElementById(updateStudent);

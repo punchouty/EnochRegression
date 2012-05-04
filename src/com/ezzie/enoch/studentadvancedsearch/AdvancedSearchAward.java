@@ -1,4 +1,4 @@
-package com.ezzie.enoch.studentnormalsearch;
+package com.ezzie.enoch.studentadvancedsearch;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 
-public class NormalSearchAward extends LoggedInUserTest {
+public class AdvancedSearchAward extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String studentAward = "Student Award";
@@ -34,14 +34,14 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void titleEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		findElementById(awardButton);
 	}
 	
 	@Test
 	public void titleAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		findElementById(awardButton);
@@ -50,7 +50,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void titleAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphanumericsMinLength(awardTitle);
 		findElementById(awardButton);
@@ -59,7 +59,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void titleSpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		specialCharMinLength(awardTitle);
 		findElementById(awardButton);
@@ -68,7 +68,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void titleMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetMaxLength(awardTitle);
 		alphabetsMinLength(awardDescription);
@@ -78,7 +78,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void descriptionEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		findElementById(awardButton);
@@ -87,17 +87,16 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void descriptionAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		alphabetsMinLength(awardDescription);
 		findElementById(awardButton);
 		verifyAwardSuccessCreated();
 	}
-	
 	@Test
 	public void descriptionAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		alphanumericsMinLength(awardDescription);
@@ -107,7 +106,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void descriptionSpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		specialCharMinLength(awardDescription);
@@ -117,7 +116,7 @@ public class NormalSearchAward extends LoggedInUserTest {
 	
 	@Test
 	public void descriptionMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		alphabetMaxLength(awardDescription);

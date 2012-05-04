@@ -40,16 +40,9 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphabetsEmpty(admissionNo);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"PLEASE ENTER FIRST NAME",
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterFirstName();
 	}
+	
 
 	@Test
 	public void firstNameEmpty() throws Exception {
@@ -57,15 +50,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphabetsEmpty(studentFirstName);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"PLEASE ENTER FIRST NAME",
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterFirstName();
 	}
 
 	@Test
@@ -74,15 +59,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"PLEASE ENTER LAST NAME",
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterLastName();
 	}
 
 	@Test
@@ -91,13 +68,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphanumericsMinLength(studentFirstName);
 		findElementById(nextButton);
-		try {
-			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR FIRST NAME", driver
-					.findElement(By.cssSelector("ul.message.warning > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyOnlyCharsFirstName();
 	}
 
 	@Test
@@ -106,16 +77,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		specialCharMinLength(studentFirstName);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Special Charcter are not allowed in First name and Admission No"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		specialCharNotAllowed();
 	}
 
 	@Test
@@ -132,16 +94,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		batch.selectByVisibleText("Nursery - A");
 		Thread.sleep(2000);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyMaxLength();
 	}
 
 	@Test
@@ -151,13 +104,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
 		findElementById(nextButton);
-		try {
-			assertEquals("Please Enter Last Name".toUpperCase(), driver
-					.findElement(By.cssSelector("ul.message.warning > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyEnterLastName();
 	}
 
 	@Test
@@ -167,15 +114,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"PLEASE SELECT BATCH",
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		selectBatch();
 	}
 
 	@Test
@@ -185,13 +124,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
 		findElementById(nextButton);
-		try {
-			assertEquals("PLEASE ENTER ONLY CHARACTERS FOR LAST NAME", driver
-					.findElement(By.cssSelector("ul.message.warning > li"))
-					.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyOnlyCharsLastName();
 	}
 
 	@Test
@@ -201,15 +134,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"Please enter only characters for last name".toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verifyOnlyCharsLastName();
 	}
 
 	@Test
@@ -226,15 +151,7 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		batch.selectByVisibleText("Nursery - A");
 		Thread.sleep(2000);
 		findElementById(nextButton);
-		try {
-			assertEquals(
-					"You can not enter more than 50 character in field"
-							.toUpperCase(),
-					driver.findElement(
-							By.cssSelector("ul.message.warning > li"))
-							.getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
+		verifyMaxLength();
 		}
-	}
 }
+

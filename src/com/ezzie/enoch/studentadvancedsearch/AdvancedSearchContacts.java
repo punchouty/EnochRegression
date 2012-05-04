@@ -1,4 +1,4 @@
-package com.ezzie.enoch.studentnormalsearch;
+package com.ezzie.enoch.studentadvancedsearch;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,7 +9,7 @@ import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
 
-public class NormalSearchContactsUpdate extends LoggedInUserTest {
+public class AdvancedSearchContacts extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String studentAddress= "student_address_line1";
@@ -33,7 +33,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateLine1Empty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsEmpty(studentAddress);
 		findElementById(update);
@@ -43,7 +43,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 
 	@Test
 	public void contactsUpdateLine1Aplhanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsMinLength(studentAddress);
 		findElementById(update);
@@ -53,7 +53,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 
 	@Test
 	public void contactsUpdateLine1SpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		specialCharMinLength(studentAddress);
 		findElementById(update);
@@ -62,7 +62,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateLine1MaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetMaxLength(studentAddress);
 		findElementById(update);
@@ -71,7 +71,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateCityEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsEmpty(studentCity);
 		findElementById(update);
@@ -80,7 +80,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateCityAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsMinLength(studentAddress);
 		alphabetsMinLength(studentCity);
@@ -90,7 +90,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateCityAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphanumericsMinLength(studentAddress);
 		alphanumericsMinLength(studentCity);
@@ -100,7 +100,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateCitySpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphanumericsMinLength(studentAddress);
 		specialCharMinLength(studentCity);
@@ -110,7 +110,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateMobileEmpty() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		numberMinLength(studentPhone);
 		findElementById(update);
@@ -119,7 +119,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateMobileNumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		numberMaxLength(studentPhone);
 		findElementById(update);
@@ -129,7 +129,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 
 	@Test
 	public void contactsUpdateMobileAlphabets() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsMinLength(studentPhone);
 		verifyEnterNumericValue();
@@ -137,7 +137,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateMobileAlphanumerics() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphanumericsMinLength(studentPhone);
 		verifyEnterNumericValue();
@@ -145,7 +145,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateMobileSpecialChars() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		specialCharMinLength(studentPhone);
 		verifyEnterNumericValue();
@@ -153,7 +153,7 @@ public class NormalSearchContactsUpdate extends LoggedInUserTest {
 	
 	@Test
 	public void contactsUpdateMobileMaxLength() throws Exception {
-		switchToStudentUpdateUnderStudentSearch();
+		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		number11Length(studentPhone);
 		findElementById(update);
