@@ -543,6 +543,32 @@ public class SeleniumBaseTest {
 			verificationErrors.append(e.toString());
 		}
 	}
+	
+	public void verifyMaxLengthFirstName() throws Exception {
+		try {
+			assertEquals(
+					"Please enter first name maximum 25 characters"
+							.toUpperCase(),
+					driver.findElement(
+							By.cssSelector("ul.message.warning > li"))
+							.getText());
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+		}
+	}
+	
+	public void verifyMaxLengthLastName() throws Exception {
+		try {
+			assertEquals(
+					"Please enter last name maximum 25 characters"
+							.toUpperCase(),
+					driver.findElement(
+							By.cssSelector("ul.message.warning > li"))
+							.getText());
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+		}
+	}
 
 	public void verifyCharsInstitution() throws Exception {
 		try {
