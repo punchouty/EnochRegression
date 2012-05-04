@@ -198,7 +198,8 @@ public class SeleniumBaseTest {
 	public void switchToStudentUpdateUnderStudentSearch() throws Exception {
 		driver.findElement(By.linkText("Student Search")).click();
 		driver.findElement(By.id("target")).clear();
-		driver.findElement(By.id("target")).sendKeys("elia");
+		driver.findElement(By.id("target")).sendKeys("Amelia");
+		Thread.sleep(1000);
 		driver.findElement(By.linkText("Amelia")).click();
 	}
 	
@@ -214,7 +215,7 @@ public class SeleniumBaseTest {
 	
 	public void alphabetMaxLength(String alphabet){
 		driver.findElement(By.id(alphabet)).clear();
-		driver.findElement(By.id(alphabet)).sendKeys(createString(51));
+		driver.findElement(By.id(alphabet)).sendKeys(createString(10));
 	}
 	
 	public void alphanumericsEmpty(String alphanumerics){
