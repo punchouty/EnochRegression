@@ -20,7 +20,6 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 	private String firstChild = "#new_student > img.first-child";
 	private String nextButton = "next_button";
 	private String admissionNo = "student_admission_no";
-	private String firstNameMessage = "Please enter First name".toUpperCase();
 	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
 	ReadCSV rc = new ReadCSV();
 	Object verify = new Object();

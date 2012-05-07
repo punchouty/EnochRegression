@@ -9,12 +9,16 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class StudentWizardStep3 extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String nextButton = "wizard_next_button";
-
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
+	
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();
@@ -39,14 +43,14 @@ public class StudentWizardStep3 extends LoggedInUserTest {
 		} catch (Error e) {
 			verificationErrors.append(e.toString());
 		}
-		verifyStudentSuccessfullyCreated();
+		verify = rc.getValue("StudentSuccessfullyCreated", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
 	public void testCropImage() throws Exception {
 		switchTOStudentWizard2();
 		switchToStudentWizard3();
-		// driver.findElement(By.id("upload_image")).clear();
 		driver.findElement(By.id("upload_image")).sendKeys(
 				"C:\\Users\\Public\\Pictures\\Sample Pictures\\andesk.png");
 		driver.findElement(By.id("wizard_next_button")).click();
@@ -57,6 +61,7 @@ public class StudentWizardStep3 extends LoggedInUserTest {
 			verificationErrors.append(e.toString());
 		}
 		findElementById(nextButton);
-		verifySuccessfullyUpdatedUser();
+		verify = rc.getValue("SuccessfullyUpdatedUser", "Message", fileName);
+		verifyText(verify);
 	}
 }

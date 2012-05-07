@@ -9,12 +9,16 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class StudentWizardStep5 extends LoggedInUserTest {
 
 	private String parentWindow = null;
 	private String guardianFirstName = "guardian_first_name";
 	private String saveGuardian = "save_guardian";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,7 +40,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		switchToStudentWizard5BlankImage();
 		findElementById(saveGuardian);
 		Thread.sleep(500);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -57,7 +62,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		alphanumericsMinLength(guardianFirstName);
 		Thread.sleep(5000);
 		findElementById(saveGuardian);
-		verifyGuardianFirstName();
+		verify = rc.getValue("GuardianFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -68,7 +74,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		specialCharMinLength(guardianFirstName);
 		Thread.sleep(500);
 		findElementById(saveGuardian);
-		verifyGuardianFirstName();
+		verify = rc.getValue("GuardianFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -79,7 +86,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		alphabetMaxLength(guardianFirstName);
 		findElementById(saveGuardian);
 		Thread.sleep(1000);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -91,7 +99,8 @@ public class StudentWizardStep5 extends LoggedInUserTest {
 		Thread.sleep(200);
 		findElementById(saveGuardian);
 		Thread.sleep(1000);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test

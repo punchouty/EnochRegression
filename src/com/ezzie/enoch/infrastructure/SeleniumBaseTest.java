@@ -395,16 +395,6 @@ public class ReadCSV {
 		}
 	}
 	
-//	public void verifyEnterFirstNameTesting(String abc) throws Exception {
-//		try {
-//			assertEquals(abc, driver
-//					.findElement(By.cssSelector("ul.message.warning > li"))
-//					.getText());
-//		} catch (Error e) {
-//			verificationErrors.append(e.toString());
-//		}
-//	}
-
 	public void verifyGuardianFirstName() throws Exception {
 		try {
 			assertEquals(

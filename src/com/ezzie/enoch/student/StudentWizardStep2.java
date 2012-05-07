@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class StudentWizardStep2 extends LoggedInUserTest {
 
@@ -18,6 +19,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 	private String city = "student_city";
 	private String studentPhone = "student_phone2";
 	private String nextButton = "wizard_next_button";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -36,7 +40,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 	public void addressLine1Empty() throws Exception {
 		switchTOStudentWizard2();
 		findElementById(nextButton);
-		verifyEnterAddress();
+		verify = rc.getValue("EnterAddress", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -44,7 +49,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetsMinLength(studentAddress);
 		findElementById(nextButton);
-		verifyEnterCity();
+		verify = rc.getValue("EnterCity", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -52,7 +58,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphanumericsMinLength(studentAddress);
 		findElementById(nextButton);
-		verifyEnterCity();
+		verify = rc.getValue("EnterCity", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -60,7 +67,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		specialCharMinLength(studentAddress);
 		findElementById(nextButton);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -68,7 +76,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetMaxLength(studentAddress);
 		findElementById(nextButton);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -76,7 +85,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		switchTOStudentWizard2();
 		alphabetsMinLength(studentAddress);
 		findElementById(nextButton);
-		verifyEnterCity();
+		verify = rc.getValue("EnterCity", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -85,8 +95,9 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphabetsMinLength(city);
 		findElementById(nextButton);
-		verifyEnterMobileNoDot();
-		}
+		verify = rc.getValue("MobileNoDot", "Message", fileName);
+		verifyText(verify);
+	}
 
 	@Test
 	public void cityAlphanumerics() throws Exception {
@@ -94,7 +105,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphanumericsMinLength(city);
 		findElementById(nextButton);
-		verifyOnlyCharsCity();
+		verify = rc.getValue("OnlyCharsCity", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -103,7 +115,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		specialCharMinLength(city);
 		findElementById(nextButton);
-		verifyOnlyCharsCity();
+		verify = rc.getValue("OnlyCharsCity", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -112,7 +125,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphabetMaxLength(city);
 		findElementById(nextButton);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -122,7 +136,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		numberMinLength(studentPhone);
 		findElementById(nextButton);
-		verifyEnterMobileNoDot();
+		verify = rc.getValue("MobileNoDot", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -146,7 +161,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		alphabetsMinLength(studentPhone);
 		findElementById(nextButton);
-		mobileNoTenDigit();
+		verify = rc.getValue("MobileNoTenDigit", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -156,7 +172,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		alphanumericsMinLength(studentPhone);
 		findElementById(nextButton);
-		mobileNoTenDigit();
+		verify = rc.getValue("MobileNoTenDigit", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -166,7 +183,8 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		specialCharMinLength(studentPhone);
 		findElementById(nextButton);
-		mobileNoTenDigit();
+		verify = rc.getValue("MobileNoTenDigit", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -176,6 +194,7 @@ public class StudentWizardStep2 extends LoggedInUserTest {
 		alphabetsMinLength(city);
 		number11Length(studentPhone);
 		findElementById(nextButton);
-		mobileNoTenDigit();
+		verify = rc.getValue("MobileNoTenDigit", "Message", fileName);
+		verifyText(verify);
 	}
 }
