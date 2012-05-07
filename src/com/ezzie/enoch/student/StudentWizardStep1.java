@@ -20,6 +20,11 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 	private String firstChild = "#new_student > img.first-child";
 	private String nextButton = "next_button";
 	private String admissionNo = "student_admission_no";
+	private String firstNameMessage = "Please enter First name".toUpperCase();
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
+	
 	
 	@Before
 	public void setUp() throws Exception {
@@ -40,7 +45,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphabetsEmpty(admissionNo);
 		findElementById(nextButton);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -50,16 +56,18 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphabetsEmpty(studentFirstName);
 		findElementById(nextButton);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
-
+	
 	@Test
 	public void firstNameAlphabets() throws Exception {
 		findElementCSSSelector(firstChild);
 		driver.switchTo().window("Student Admission");
 		alphabetsMinLength(studentFirstName);
 		findElementById(nextButton);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -68,7 +76,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		alphanumericsMinLength(studentFirstName);
 		findElementById(nextButton);
-		verifyOnlyCharsFirstName();
+		verify = rc.getValue("OnlyCharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -77,7 +86,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("Student Admission");
 		specialCharMinLength(studentFirstName);
 		findElementById(nextButton);
-		specialCharNotAllowed();
+		verify = rc.getValue("SpecialCharacter", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -94,7 +104,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		batch.selectByVisibleText("Nursery - A");
 		Thread.sleep(2000);
 		findElementById(nextButton);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -104,7 +115,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
 		findElementById(nextButton);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -114,7 +126,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		findElementById(nextButton);
-		selectBatch();
+		verify = rc.getValue("SelectBatch", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -124,7 +137,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
 		findElementById(nextButton);
-		verifyOnlyCharsLastName();
+		verify = rc.getValue("OnlyCharsLastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -134,7 +148,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
 		findElementById(nextButton);
-		verifyOnlyCharsLastName();
+		verify = rc.getValue("OnlyCharsLastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -151,7 +166,8 @@ public class StudentWizardStep1 extends LoggedInUserTest {
 		batch.selectByVisibleText("Nursery - A");
 		Thread.sleep(2000);
 		findElementById(nextButton);
-		verifyMaxLength();
-		}
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
+	}
 }
 

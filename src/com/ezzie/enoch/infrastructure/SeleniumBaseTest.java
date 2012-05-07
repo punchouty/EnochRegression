@@ -4,12 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.StringTokenizer;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.BeforeClass;
@@ -317,6 +322,68 @@ public class SeleniumBaseTest {
 	public void findElementXPath(String alphabet) {
 		driver.findElement(By.xpath(alphabet)).click();
 	}
+	
+	public void verifyText(Object o){
+		try {
+			assertEquals(o, driver
+					.findElement(By.cssSelector("ul.message.warning > li"))
+					.getText());
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+		}
+	}
+	
+public class ReadCSV {
+		
+		public String getValue(String scenarioName, String columnName,String fileName){
+		 
+		try {
+		 
+		// csv file containing data
+			//fileName = "C:/Users/VHANDA/Desktop/data.csv";
+		String strFile  =  fileName;
+		String strLine   =   "";
+		StringTokenizer st  =   null;
+		int lineNumber   =   0;
+		 
+		// create BufferedReader to read csv file
+		BufferedReader br = new BufferedReader(new FileReader(strFile));
+		 
+		strLine = br.readLine(); //read first line
+		st = new StringTokenizer(strLine, ",");
+		int totalRows = st.countTokens();
+		 
+		 
+		Map<Object,String> mp=new HashMap<Object, String>();
+		 
+		//Fetch the header
+		for(int row=0; row<totalRows; row++){
+		mp.put(new Integer(row), st.nextToken());
+		}
+		lineNumber++;
+		 
+		while ((strLine = br.readLine()) != null){
+		st = new StringTokenizer(strLine, ",");
+		lineNumber++;
+		if(st.nextToken().equalsIgnoreCase(scenarioName)){
+		//Identified the row Now return the specific element based on column name specified.
+		totalRows= st.countTokens();
+		for(int key=1; key<=totalRows; key++){
+		String value = st.nextToken();
+		if(mp.get(key).equalsIgnoreCase(columnName)){
+		return value;
+		}
+		}
+		}
+		}
+		
+		}catch (Exception e){
+		System.out.println("Exception while reading csv file: " + e);
+		}
+		 
+		return "Element Not Found";
+		}
+	}
 
 	public void verifyEnterFirstName() throws Exception {
 		try {
@@ -327,6 +394,16 @@ public class SeleniumBaseTest {
 			verificationErrors.append(e.toString());
 		}
 	}
+	
+//	public void verifyEnterFirstNameTesting(String abc) throws Exception {
+//		try {
+//			assertEquals(abc, driver
+//					.findElement(By.cssSelector("ul.message.warning > li"))
+//					.getText());
+//		} catch (Error e) {
+//			verificationErrors.append(e.toString());
+//		}
+//	}
 
 	public void verifyGuardianFirstName() throws Exception {
 		try {
