@@ -333,6 +333,16 @@ public class SeleniumBaseTest {
 		}
 	}
 	
+	public void verifyTextSuccess(Object o){
+		try {
+			assertEquals(o, driver
+					.findElement(By.cssSelector("ul.message.success > li"))
+					.getText());
+		} catch (Error e) {
+			verificationErrors.append(e.toString());
+		}
+	}
+	
 public class ReadCSV {
 		
 		public String getValue(String scenarioName, String columnName,String fileName){

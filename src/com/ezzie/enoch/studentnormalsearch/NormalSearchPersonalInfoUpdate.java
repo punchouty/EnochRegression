@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 
@@ -21,6 +22,9 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 	private String studentImage = "student_image";
 	private String updateId = "student_update_id";
 	private String cropImage = "Crop_image";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,6 +44,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		driver.findElement(By.linkText("Student Search")).click();
 		driver.findElement(By.id("target")).clear();
 		driver.findElement(By.id("target")).sendKeys("elia");
+		Thread.sleep(1000);
 		driver.findElement(By.linkText("Amelia")).click();
 		try {
 			assertEquals(
@@ -118,7 +123,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetsEmpty(studentFirstName);
 		findElementById(update);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -127,7 +133,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
 		findElementById(update);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -136,8 +143,9 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		findElementById(update);
-		verifySuccessfullyUpdated();
-		verifySuccessfullyUpdated();
+		Thread.sleep(500);
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 	@Test
@@ -145,7 +153,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphanumericsMinLength(studentFirstName);
 		findElementById(update);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -154,7 +163,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
 		findElementById(update);
-		verifyEnterCharactersLastName();
+		verify = rc.getValue("CharsLastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -162,7 +172,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		specialCharMinLength(studentFirstName);
 		findElementById(update);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -171,7 +182,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
 		findElementById(update);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -179,7 +191,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		switchToStudentUpdateUnderStudentSearch();
 		alphabetMaxLength(studentFirstName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -188,7 +201,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetMaxLength(studentLastName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -211,7 +225,8 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		category2.selectByVisibleText("Other");
 		Thread.sleep(500);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 
 	@Test
@@ -226,6 +241,7 @@ public class NormalSearchPersonalInfoUpdate extends LoggedInUserTest {
 		findElementById(cropImage);
 		driver.switchTo().window(parentWindow);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 }

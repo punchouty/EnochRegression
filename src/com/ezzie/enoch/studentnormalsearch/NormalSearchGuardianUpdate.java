@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 
@@ -20,6 +21,9 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	private String  addGuardian= "#add-more-parents > img.first-child.last-child";
 	private String xpathRelation = "(//select[@id='relation'])[2]";
 	private String xpathButton = "//button[@type='button']";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -37,54 +41,65 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	@Test
 	public void firstNameEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		alphabetsEmpty(firstName);
 		findElementById(update);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void firstNameAlphabets() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		alphabetsMinLength(firstName);
 		new Select(driver.findElement(By.id("relation6"))).selectByVisibleText("Father");
 		Thread.sleep(500);
 		findElementById(update);
-		guardianSuccessfullyUpdated();
+		verify = rc.getValue("GuardianSuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 	@Test
 	public void firstNameAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		alphanumericsMinLength(firstName);
 		findElementById(update);
-		verifyOnlyCharsFirstName();
+		verify = rc.getValue("OnlyCharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void firstNameSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		specialCharMinLength(firstName);
 		findElementById(update);
-		verifyOnlyCharsFirstName();
+		verify = rc.getValue("OnlyCharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void firstNameMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		alphabetMaxLength(firstName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 
 	@Test
 	public void addOneMoreGuardian() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphabetsMinLinkText(xPath);
@@ -95,40 +110,48 @@ public class NormalSearchGuardianUpdate extends LoggedInUserTest {
 	@Test
 	public void newGuardianFirstNameEmpty() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphabetsEmptyLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void newGuardianFirstNameAlphanumerics() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		alphanumericsLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void newGuardianFirstNameSpecialChars() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		specialCharsLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
 	public void newGuardianFirstNameMaxLength() throws Exception {
 		switchToStudentUpdateUnderStudentSearch();
+		Thread.sleep(500);
 		findElementLinkText(guardian);
 		findElementCSSSelector(addGuardian);
 		maxLengthLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 }
