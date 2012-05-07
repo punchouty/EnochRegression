@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 
@@ -15,6 +16,9 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 	private String history = "History";
 	private String updateStudent = "update_student_previous_detail";
 	private String previousInst = "student_previous_details_institution";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -35,7 +39,8 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 		findElementLinkText(history);
 		alphabetsEmpty(previousInst);
 		findElementById(updateStudent);
-		errorsProcessingRequest();
+		verify = rc.getValue("ErrorsProcessingRequest", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -44,7 +49,8 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 		findElementLinkText(history);
 		alphabetsMinLength(previousInst);
 		findElementById(updateStudent);
-		previousSuccessfullyUpdated();
+		verify = rc.getValue("PreviousSuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 	@Test
@@ -53,7 +59,8 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 		findElementLinkText(history);
 		alphanumericsMinLength(previousInst);
 		findElementById(updateStudent);
-		verifyCharsInstitution();
+		verify = rc.getValue("CharsInstitution", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -63,7 +70,8 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 		findElementLinkText(history);
 		specialCharMinLength(previousInst);
 		findElementById(updateStudent);
-		verifyCharsInstitution();
+		verify = rc.getValue("CharsInstitution", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -73,6 +81,7 @@ public class NormalSearchHistoryUpdate extends LoggedInUserTest {
 		findElementLinkText(history);
 		alphabetMaxLength(previousInst);
 		findElementById(updateStudent);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 }
