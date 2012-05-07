@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class AdvancedSearchGuardian extends LoggedInUserTest {
 
@@ -20,6 +21,9 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 	private String  addGuardian= "#add-more-parents > img.first-child.last-child";
 	private String xpathRelation = "(//select[@id='relation'])[2]";
 	private String xpathButton = "//button[@type='button']";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -40,7 +44,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementLinkText(guardian);
 		alphabetsEmpty(firstName);
 		findElementById(update);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -51,7 +56,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		new Select(driver.findElement(By.id("relation6"))).selectByVisibleText("Father");
 		Thread.sleep(500);
 		findElementById(update);
-		guardianSuccessfullyUpdated();
+		verify = rc.getValue("GuardianSuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 	@Test
@@ -60,7 +66,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementLinkText(guardian);
 		alphanumericsMinLength(firstName);
 		findElementById(update);
-		verifyOnlyCharsFirstName();
+		verify = rc.getValue("OnlyCharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -69,7 +76,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementLinkText(guardian);
 		specialCharMinLength(firstName);
 		findElementById(update);
-		verifyOnlyCharsFirstName();
+		verify = rc.getValue("OnlyCharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -78,7 +86,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementLinkText(guardian);
 		alphabetMaxLength(firstName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 
@@ -99,7 +108,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementCSSSelector(addGuardian);
 		alphabetsEmptyLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -109,7 +119,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementCSSSelector(addGuardian);
 		alphanumericsLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -119,7 +130,8 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementCSSSelector(addGuardian);
 		specialCharsLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -129,6 +141,7 @@ public class AdvancedSearchGuardian extends LoggedInUserTest {
 		findElementCSSSelector(addGuardian);
 		maxLengthLinkText(xPath);
 		findElementXPath(xpathButton);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 }

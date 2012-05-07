@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 
@@ -20,6 +21,9 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 	private String xpathButton = "(//button[@type='button'])[2]";
 	private String studentImage = "student_image";
 	private String cropImage = "Crop_image";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -39,7 +43,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		alphabetsEmpty(studentFirstName);
 		findElementById(update);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -48,7 +53,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsEmpty(studentLastName);
 		findElementById(update);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -57,7 +63,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetsMinLength(studentLastName);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 
 	@Test
@@ -65,7 +72,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		alphanumericsMinLength(studentFirstName);
 		findElementById(update);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -74,7 +82,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphanumericsMinLength(studentLastName);
 		findElementById(update);
-		verifyEnterCharactersLastName();
+		verify = rc.getValue("CharsLastName", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -82,7 +91,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		specialCharMinLength(studentFirstName);
 		findElementById(update);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -91,7 +101,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		specialCharMinLength(studentLastName);
 		findElementById(update);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -99,7 +110,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		alphabetMaxLength(studentFirstName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -108,7 +120,8 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		alphabetsMinLength(studentFirstName);
 		alphabetMaxLength(studentLastName);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 
 	@Test
@@ -145,6 +158,7 @@ public class AdvancedSearchPersonalInfo extends LoggedInUserTest {
 		findElementById(cropImage);
 		driver.switchTo().window(parentWindow);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 }

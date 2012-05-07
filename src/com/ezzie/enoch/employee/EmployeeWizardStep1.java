@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class EmployeeWizardStep1 extends LoggedInUserTest {
 
@@ -17,6 +18,9 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 	private String nextButton = "next_button";
 	private String firstName = "first_name";
 	private String lastName = "employee_last_name";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 	
 
 	@Before
@@ -38,11 +42,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("mywindow");
 		alphabetsEmpty(employeeNumber);
 		findElementById(nextButton);
-		try {
-			assertEquals("Please enter valid Employee number".toUpperCase(), driver.findElement(By.cssSelector("ul.message.warning > li")).getText());
-		} catch (Error e) {
-			verificationErrors.append(e.toString());
-		}
+		verify = rc.getValue("ValidEmployeeNumber", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -51,7 +52,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		driver.switchTo().window("mywindow");
 		Thread.sleep(500);
 		findElementById(nextButton);
-		verifyEnterFirstName();
+		verify = rc.getValue("FirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -61,7 +63,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(firstName);
 		Thread.sleep(500);
 		findElementById(nextButton);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -71,7 +74,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphanumericsMinLength(firstName);
 		alphabetsMinLength(lastName);
 		findElementById(nextButton);
-		verifyEnterCharactersFirstName();
+		verify = rc.getValue("CharsFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -81,7 +85,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		specialCharMinLength(firstName);
 		alphabetsMinLength(lastName);
 		findElementById(nextButton);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -91,7 +96,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetMaxLength(firstName);
 		findElementById(nextButton);
 		Thread.sleep(5000);
-		verifyMaxLengthFirstName();
+		verify = rc.getValue("MaxLengthFirstName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -102,7 +108,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(firstName);
 		Thread.sleep(500);
 		findElementById(nextButton);
-		verifyEnterLastName();
+		verify = rc.getValue("LastName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -122,7 +129,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(firstName);
 		alphanumericsMinLength(lastName);
 		findElementById(nextButton);
-		verifyEnterCharactersLastName();
+		verify = rc.getValue("CharsLastName", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -133,7 +141,8 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(firstName);
 		specialCharMinLength(lastName);
 		findElementById(nextButton);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -143,6 +152,7 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 		alphabetsMinLength(firstName);
 		alphabetMaxLength(lastName);
 		findElementById(nextButton);
-		verifyMaxLengthLastName();
+		verify = rc.getValue("MaxLengthLastName", "Message", fileName);
+		verifyText(verify);
 	}
 }

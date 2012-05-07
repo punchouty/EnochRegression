@@ -10,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.Select;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class AdvancedSearchAward extends LoggedInUserTest {
 
@@ -18,6 +19,9 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 	private String awardButton = "create_student_award";
 	private String awardTitle = "award_title";
 	private String awardDescription = "award_description";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 	
 	@Before
 	public void setUp() throws Exception {
@@ -45,7 +49,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		findElementById(awardButton);
-		verifyEnterDescription();
+		verify = rc.getValue("EnterDescription", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -54,7 +59,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		findElementLinkText(studentAward);
 		alphanumericsMinLength(awardTitle);
 		findElementById(awardButton);
-		verifyEnterCharsAwardTitle();
+		verify = rc.getValue("CharsAwardTitle", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -63,7 +69,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		findElementLinkText(studentAward);
 		specialCharMinLength(awardTitle);
 		findElementById(awardButton);
-		verifyEnterCharsAwardTitle();
+		verify = rc.getValue("CharsAwardTitle", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -73,7 +80,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		alphabetMaxLength(awardTitle);
 		alphabetsMinLength(awardDescription);
 		findElementById(awardButton);
-		verifyMaxLengthFifty();
+		verify = rc.getValue("MaxLengthFifty", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -82,7 +90,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		findElementLinkText(studentAward);
 		alphabetsMinLength(awardTitle);
 		findElementById(awardButton);
-		verifyEnterDescription();
+		verify = rc.getValue("EnterDescription", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -92,7 +101,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		alphabetsMinLength(awardTitle);
 		alphabetsMinLength(awardDescription);
 		findElementById(awardButton);
-		verifyAwardSuccessCreated();
+		verify = rc.getValue("AwardCreated", "Message", fileName);
+		verifyText(verify);
 	}
 	@Test
 	public void descriptionAlphanumerics() throws Exception {
@@ -101,8 +111,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		alphabetsMinLength(awardTitle);
 		alphanumericsMinLength(awardDescription);
 		findElementById(awardButton);
-		verifyEnterCharsAwardDescription();
-	}
+		verify = rc.getValue("CharsAwardDescription", "Message", fileName);
+		verifyText(verify);	}
 	
 	@Test
 	public void descriptionSpecialChars() throws Exception {
@@ -111,7 +121,8 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		alphabetsMinLength(awardTitle);
 		specialCharMinLength(awardDescription);
 		findElementById(awardButton);
-		verifyEnterCharsAwardTitle();
+		verify = rc.getValue("CharsAwardTitle", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -121,6 +132,7 @@ public class AdvancedSearchAward extends LoggedInUserTest {
 		alphabetsMinLength(awardTitle);
 		alphabetMaxLength(awardDescription);
 		findElementById(awardButton);
-		verifyMaxLengthFifty();
+		verify = rc.getValue("MaxLengthFifty", "Message", fileName);
+		verifyText(verify);
 	}
 }

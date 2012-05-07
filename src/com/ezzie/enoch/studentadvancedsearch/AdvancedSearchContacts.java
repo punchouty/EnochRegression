@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 
 import com.ezzie.enoch.infrastructure.LoggedInUserTest;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest.ReadCSV;
 
 public class AdvancedSearchContacts extends LoggedInUserTest {
 
@@ -17,6 +18,9 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 	private String studentPhone = "student_phone2";
 	private String contact = "Contacts";
 	private String update = "update_contact";
+	private String fileName = "C:/Users/VHANDA/Desktop/data.csv";
+	ReadCSV rc = new ReadCSV();
+	Object verify = new Object();
 
 	@Before
 	public void setUp() throws Exception {
@@ -37,7 +41,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		alphabetsEmpty(studentAddress);
 		findElementById(update);
-		verifyEnterAddressLine();
+		verify = rc.getValue("EnterAddressLine1", "Message", fileName);
+		verifyText(verify);
 	}
 	
 
@@ -47,7 +52,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		alphabetsMinLength(studentAddress);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 
@@ -57,7 +63,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		specialCharMinLength(studentAddress);
 		findElementById(update);
-		verifySpecialChars();
+		verify = rc.getValue("VerifySpecialChars", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -66,7 +73,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		alphabetMaxLength(studentAddress);
 		findElementById(update);
-		verifyMaxLength();
+		verify = rc.getValue("MaxLength", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -75,7 +83,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		alphabetsEmpty(studentCity);
 		findElementById(update);
-		verifyEnterCity();
+		verify = rc.getValue("EnterCity", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -85,7 +94,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		alphabetsMinLength(studentAddress);
 		alphabetsMinLength(studentCity);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 	@Test
@@ -95,7 +105,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		alphanumericsMinLength(studentAddress);
 		alphanumericsMinLength(studentCity);
 		findElementById(update);
-		verifyEnterCharactersCity();
+		verify = rc.getValue("CharsCity", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -105,7 +116,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		alphanumericsMinLength(studentAddress);
 		specialCharMinLength(studentCity);
 		findElementById(update);
-		verifyEnterCharactersCity();
+		verify = rc.getValue("CharsCity", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -114,7 +126,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		numberMinLength(studentPhone);
 		findElementById(update);
-		verifyEnterMobileNo();
+		verify = rc.getValue("MobileNumber", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -123,7 +136,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		numberMaxLength(studentPhone);
 		findElementById(update);
-		verifySuccessfullyUpdated();
+		verify = rc.getValue("SuccessfullyUpdated", "Message", fileName);
+		verifyTextSuccess(verify);
 	}
 	
 
@@ -132,7 +146,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphabetsMinLength(studentPhone);
-		verifyEnterNumericValue();
+		verify = rc.getValue("NumericValue", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -140,7 +155,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		alphanumericsMinLength(studentPhone);
-		verifyEnterNumericValue();
+		verify = rc.getValue("NumericValue", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -148,7 +164,8 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		switchToStudentUpdateWithAdvancedSearch();
 		findElementLinkText(contact);
 		specialCharMinLength(studentPhone);
-		verifyEnterNumericValue();
+		verify = rc.getValue("NumericValue", "Message", fileName);
+		verifyText(verify);
 	}
 	
 	@Test
@@ -157,6 +174,7 @@ public class AdvancedSearchContacts extends LoggedInUserTest {
 		findElementLinkText(contact);
 		number11Length(studentPhone);
 		findElementById(update);
-		mobileNoTenDigit();
+		verify = rc.getValue("MobileNoTenDigit", "Message", fileName);
+		verifyText(verify);
 	}
 }
