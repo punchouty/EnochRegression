@@ -39,6 +39,10 @@ public class SeleniumBaseTest {
 	private String addressStudent = "student_address_line1";
 	private String cityStudent = "student_city";
 	private String phoneStudent = "student_phone2";
+	private String firstNameEmployee = "first_name";
+	private String lastNameEmployee = "employee_last_name";
+	private String nextButton = "next_button";
+	private String newEmployee = "#new_employee > img.first-child";
 
 	@BeforeClass
 	public static void loadConfiguration() {
@@ -231,6 +235,31 @@ public class SeleniumBaseTest {
 		Thread.sleep(1000);
 		driver.findElement(By.linkText("Amelia")).click();
 	}
+	
+	public void switchToEmployeeWizard2(){
+		findElementCSSSelector(newEmployee);
+		driver.switchTo().window("mywindow");
+		alphabetsMinLength(firstNameEmployee);
+		alphabetsMinLength(lastNameEmployee);
+		findElementById(nextButton);
+	}
+	
+	public void switchToEmployeeWizard3() throws Exception{
+		switchToEmployeeWizard2();
+		new Select(driver.findElement(By.id("employee_employee_department_id")))
+		.selectByVisibleText("Mathematics");
+		Thread.sleep(1000);
+		new Select(driver.findElement(By.id("employee_employee_category_id")))
+		.selectByVisibleText("Teaching");
+		Thread.sleep(1000);
+		new Select(driver.findElement(By.id("employee_employee_position_id"))).selectByVisibleText("Jr.Teacher");
+		driver.findElement(By.id("next_button")).click();
+		findElementById(nextButton);
+	}
+	
+	public void switchToEmployeeWizard4() throws Exception{
+		switchToEmployeeWizard3();
+		}
 
 	public void alphabetsEmpty(String alphabet) {
 		driver.findElement(By.id(alphabet)).clear();
