@@ -76,7 +76,7 @@ public class SeleniumBaseTest {
 							true);
 			driver = new InternetExplorerDriver(ieCapabilities);
 
-		} else if (System.getProperty("browser").equalsIgnoreCase("IE")) {
+		} else if (System.getProperty("browser").equalsIgnoreCase("Chrome")) {
 			driver = new ChromeDriver();
 		}
 		baseUrl = System.getProperty("baseUrl");
@@ -103,7 +103,7 @@ public class SeleniumBaseTest {
 	}
 
 	protected void verifyTextPresent(String source, String expected) {
-		assertTrue(source.indexOf(expected) >= 0);
+		assertTrue(source.indexOf(expected) > -1);
 	}
 
 	protected String createString(int length) {
@@ -435,4 +435,5 @@ public void verifyStudentSuccessfullyUpdated() throws Exception {
 		verificationErrors.append(e.toString());
 	}
 }
+
 }
