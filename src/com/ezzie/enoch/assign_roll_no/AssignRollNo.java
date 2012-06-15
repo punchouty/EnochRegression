@@ -1,0 +1,209 @@
+package com.ezzie.enoch.assign_roll_no;
+
+import static org.junit.Assert.*;
+
+import java.util.Collections;
+import java.util.Comparator;
+
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+
+import com.ezzie.enoch.employee_category.Common;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
+
+public class AssignRollNo extends SeleniumBaseTest{
+	Common common = new Common();
+	@Before
+	public void setUp() throws Exception {
+		super.setUp();
+		driver.get(baseUrl + "/signin");
+		driver.findElement(By.id("session_username")).clear();
+		driver.findElement(By.id("session_username")).sendKeys("E0001");
+		driver.findElement(By.id("session_password")).clear();
+		driver.findElement(By.id("session_password")).sendKeys("password");
+		driver.findElement(By.name("commit")).click();
+	}
+
+	@After
+	public void tearDown() throws Exception {
+		driver.findElement(By.linkText("LOGOUT")).click();	
+		super.tearDown();
+	}
+	
+	@Test
+	public void checkReAssignRollNoStudentTable() throws Exception{
+		WebElement myDynamicElement = (new WebDriverWait(driver, 5))
+		  .until(new ExpectedCondition<WebElement>(){
+			@Override
+			public WebElement apply(WebDriver d) {
+				return d.findElement(By.linkText("Reassign Roll Number"));
+			}});
+		myDynamicElement.click();
+		assertFalse(common.isElementPresents(By.id("batchwise"), driver));
+	 }
+	
+	@Test
+	public void checkBatchSize() throws Exception{
+		checkReAssignRollNoStudentTable();
+		List<WebElement> list1 = new Select(driver.findElement(By.id("student_batch_wise_student"))).getOptions();
+		String batchSizeBeforeCourseSelection = Integer.toString(list1.size());
+		new Select(driver.findElement(By.id("batch_search_course_id"))).selectByVisibleText("PreNursery");
+		Thread.sleep(2000);
+		List<WebElement> list2 = new Select(driver.findElement(By.id("student_batch_wise_student"))).getOptions();
+		String batchSizeAfterCourseSelection = Integer.toString(list2.size());
+    	assertFalse(common.verifyEquality(batchSizeBeforeCourseSelection, batchSizeAfterCourseSelection));
+	 }
+	
+	@Test
+	public void checkStudentTablePresence() throws Exception{
+		checkBatchSize();
+		WebElement myDynamicElement = (new WebDriverWait(driver, 10))
+		  .until(new ExpectedCondition<WebElement>(){
+			@Override
+			public WebElement apply(WebDriver d) {
+				return d.findElement(By.id("student_batch_wise_student"));
+			}});
+		Select select = new Select(myDynamicElement);
+		select.selectByIndex(1);
+		Thread.sleep(2000);
+		assertTrue(common.isElementPresents(By.id("batchwise"), driver));
+	 }
+	
+	@Test
+	public void assignRollNo() throws Exception{
+		checkStudentTablePresence();
+		driver.findElement(By.id("assign_Name")).click();
+		driver.findElement(By.id("Assign_Roll_No")).click();
+		WebElement myDynamicElement = (new WebDriverWait(driver, 5))
+		  .until(new ExpectedCondition<WebElement>(){
+			@Override
+			public WebElement apply(WebDriver d) {
+				return d.findElement(By.cssSelector("ul.success"));
+			}});
+		verifyTextPresent(myDynamicElement.getText(), "SUCCESSFULLY ASSIGNED ROLL NO.");
+	 }
+	
+	
+	@Test
+	@SuppressWarnings("unchecked")
+	public void checkAssignRollNoByName() throws Exception{
+		checkStudentTablePresence();
+		driver.findElement(By.id("assign_Name")).click();
+		driver.findElement(By.id("Assign_Roll_No")).click();
+		Thread.sleep(2000);
+		Map<String,String> singleStudentMap = returnStudentData("batchwise","id('batchwise')/tbody/tr", "td",2, 5, "a", "href", driver);
+		Map<String,String> sortedMap =  sortByComparator(singleStudentMap);
+		Object[] objects = sortedMap.entrySet().toArray();
+		Map.Entry<String,String> entry = (java.util.Map.Entry<String, String>) objects[1];
+		String studentRollNo = entry.getKey();
+		Map.Entry<String,String> nextEntry = (java.util.Map.Entry<String, String>) objects[sortedMap.size()-1];
+		String lastStudentRollNo = nextEntry.getKey();
+        assertTrue(common.verifyEquality(studentRollNo, "1"));
+        assertTrue(common.verifyEquality(lastStudentRollNo, Integer.toString(sortedMap.size()-1)));
+	 }
+	
+	@Test
+	@SuppressWarnings({ "unchecked" })
+	public void checkAssignRollNoByAddmissionNo() throws Exception{
+		checkStudentTablePresence();
+		driver.findElement(By.id("assign_Admission_No.")).click();
+		driver.findElement(By.id("Assign_Roll_No")).click();
+		Thread.sleep(2000);
+		Map<String,String> singleStudentMap = returnStudentRollNoAndAdmissionNo("batchwise","id('batchwise')/tbody/tr", "td",2, 3, "a", "href", driver);
+		Map<String,String> sortedMap =  sortByComparator(singleStudentMap);
+		Object[] objects = sortedMap.entrySet().toArray();
+		Map.Entry<String,String> entry = (java.util.Map.Entry<String, String>) objects[1];
+		String studentRollNoAdmissionWise = entry.getKey();
+		Map.Entry<String,String> nextEntry = (java.util.Map.Entry<String, String>) objects[sortedMap.size()-1];
+		String lastStudentRollNoAdmissionWise = nextEntry.getKey();
+		assertTrue(common.verifyEquality(studentRollNoAdmissionWise, "1"));
+		assertTrue(common.verifyEquality(lastStudentRollNoAdmissionWise, Integer.toString(sortedMap.size()-1)));
+	 }
+	
+	public Map<String, String> returnStudentData(String tableId,String tableRow,String tableTd,int rollNoCol, int tableCol,String tagName, String attr, WebDriver driver){
+		WebElement table_element = driver.findElement(By.id(tableId));
+		Map<String,String> map = new LinkedHashMap<String,String>();
+        List<WebElement> tr_collection = table_element.findElements(By.xpath(tableRow));      
+        String rollNo = "";
+        String idText = "";
+        int row_num,col_num;
+        row_num=1;
+        for(WebElement trElement : tr_collection){
+            List<WebElement> td_collection = trElement.findElements(By.xpath(tableTd));
+            col_num=1;
+            for(WebElement tdElement : td_collection){
+            	 if(col_num == tableCol){
+            		WebElement timeField1 = tdElement.findElement(By.tagName(tagName));
+            		idText = timeField1.getText();
+            	 }
+            	 if(col_num == rollNoCol){
+            		 rollNo = tdElement.getText();
+             	 }
+            	 map.put(rollNo, idText);
+            	 col_num++;
+            }
+            row_num++;
+        }
+        return map;
+	}
+	
+	public Map<String, String> returnStudentRollNoAndAdmissionNo(String tableId,String tableRow,String tableTd,int rollNoCol, int admissionNoCol,String tagName, String attr, WebDriver driver){
+		WebElement table_element = driver.findElement(By.id(tableId));
+		Map<String,String> map = new LinkedHashMap<String,String>();
+        List<WebElement> tr_collection = table_element.findElements(By.xpath(tableRow));      
+        String rollNo = "";
+        String admissionNo = "";
+        int row_num,col_num;
+        row_num=1;
+        for(WebElement trElement : tr_collection){
+            List<WebElement> td_collection = trElement.findElements(By.xpath(tableTd));
+            col_num=1;
+            for(WebElement tdElement : td_collection){
+            	 if(col_num == admissionNoCol){
+            		 admissionNo = tdElement.getText();
+            	 }
+            	 if(col_num == rollNoCol){
+            		 rollNo = tdElement.getText();
+             	 }
+            	 map.put(rollNo, admissionNo);
+            	 col_num++;
+            }
+            row_num++;
+        }
+        return map;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static Map sortByComparator(Map unsortMap) {
+	
+	    List list = new LinkedList(unsortMap.entrySet());
+	        Collections.sort(list, new Comparator() {
+	             public int compare(Object o1, Object o2) {
+		           return ((Comparable) ((Map.Entry) (o1)).getValue())
+		           .compareTo(((Map.Entry) (o2)).getValue());
+	             }
+	        });
+		Map sortedMap = new LinkedHashMap();
+		for (Iterator it = list.iterator(); it.hasNext();) {
+		     Map.Entry entry = (Map.Entry)it.next();
+		     sortedMap.put(entry.getKey(), entry.getValue());
+		}
+		return sortedMap;
+	   }	
+
+}

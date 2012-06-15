@@ -136,7 +136,6 @@ public class EmployeeWizardStep1 extends LoggedInUserTest {
 
 	@Test
 	public void lastNameSpecialChars() throws Exception {
-		findElementCSSSelector(newEmployee);
 		driver.switchTo().window("mywindow");
 		alphabetsMinLength(firstName);
 		specialCharMinLength(lastName);

@@ -1,0 +1,199 @@
+package com.ezzie.enoch.employee_departments;
+
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+
+import com.ezzie.enoch.employee_category.Common;
+import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
+
+public class EmployeeDepartments extends SeleniumBaseTest {
+	Common common = new Common();
+
+	@Before
+	public void setup() throws Exception{
+		super.setUp();
+		driver.get(baseUrl + "/signin");
+		driver.findElement(By.id("session_username")).clear();
+		driver.findElement(By.id("session_username")).sendKeys("E0001");
+		driver.findElement(By.id("session_password")).clear();
+		driver.findElement(By.id("session_password")).sendKeys("password");
+		driver.findElement(By.name("commit")).click();
+	}
+	
+	@After
+	public void teardown() throws Exception{
+		driver.findElement(By.linkText("LOGOUT")).click();	
+		super.tearDown();
+	}
+
+	 @Test
+	 public void empty_department_name() throws Exception{
+	 driver.findElement(By.linkText("HR Settings")).click();
+     driver.findElement(By.linkText("Employee Department")).click();
+	 driver.findElement(By.id("employee_department_name")).clear();
+	 driver.findElement(By.id("create_department")).click();
+	 String warning = driver.findElement(By.cssSelector("ul.warning")).getText();
+	 verifyTextPresent(warning, "PLEASE ENTER VALID DEPARTMENT NAME");
+	 }
+
+	 @Test
+	 public void emptyDepartmentCode() throws Exception{
+	     driver.findElement(By.linkText("HR Settings")).click();
+       driver.findElement(By.linkText("Employee Department")).click();
+		 driver.findElement(By.id("employee_department_name")).clear();
+		 driver.findElement(By.id("employee_department_name")).sendKeys("Name");
+		 driver.findElement(By.id("employee_department_code")).clear();
+		 driver.findElement(By.id("create_department")).click();
+		 String warning=driver.findElement(By.cssSelector("ul.warning")).getText();
+		 verifyTextPresent(warning, "PLEASE ENTER DEPARTMENT CODE");
+	 }
+	 
+	 @Test
+	 public void create_department() throws Exception{
+		 driver.findElement(By.linkText("HR Settings")).click();
+       driver.findElement(By.linkText("Employee Department")).click();
+		 driver.findElement(By.id("employee_department_name")).clear();
+		 driver.findElement(By.id("employee_department_name")).sendKeys(common.randomstring());
+		 driver.findElement(By.id("employee_department_code")).clear();
+		 driver.findElement(By.id("employee_department_code")).sendKeys("abc");
+		 driver.findElement(By.id("create_department")).click();
+		 String success = driver.findElement(By.cssSelector("ul.success")).getText();
+		 verifyTextPresent(success, "EMPLOYEE DEPARTMENT WAS SUCCESSFULLY CREATED.");
+	 }
+
+	 @Test
+	 public void createInActiveDepartment() throws Exception{
+		 driver.findElement(By.linkText("HR Settings")).click();
+         driver.findElement(By.linkText("Employee Department")).click();
+		 driver.findElement(By.id("employee_department_name")).clear();
+		 driver.findElement(By.id("employee_department_name")).sendKeys(common.randomstring());
+		 driver.findElement(By.id("employee_department_code")).clear();
+		 driver.findElement(By.id("employee_department_code")).sendKeys(common.randomstring().substring(4));
+		 driver.findElement(By.id("employee_department_status_false")).click();
+		 int rowCountBeforeCreate = common.returnTableRowCount("inactive-table", "id('inactive-table')/tbody/tr",driver);
+		 driver.findElement(By.id("create_department")).click();
+		 Thread.sleep(2000);
+		 int rowCountAfterCreate = common.returnTableRowCount("inactive-table", "id('inactive-table')/tbody/tr",driver);
+		 assertFalse(common.verifyEquality(Integer.toString(rowCountBeforeCreate),Integer.toString(rowCountAfterCreate) ));
+	 }
+	
+	 @Test
+	 public void numericDepartmentName() throws Exception{
+	     driver.findElement(By.linkText("HR Settings")).click();
+         driver.findElement(By.linkText("Employee Department")).click();
+		 driver.findElement(By.id("employee_department_name")).clear();
+		 driver.findElement(By.id("employee_department_name")).sendKeys(Integer.toString(common.randomInteger(100)));
+		 driver.findElement(By.id("create_department")).click();
+		 String warning=driver.findElement(By.cssSelector("ul.warning")).getText();
+		 System.out.println(warning);
+		 verifyTextPresent(warning, "PLEASE ENTER CHARACTERS FOR NAME");
+	 }
+
+	 @Test
+	 public void maximumLengthName() throws Exception{
+		 driver.findElement(By.linkText("HR Settings")).click();
+         driver.findElement(By.linkText("Employee Department")).click();
+		 driver.findElement(By.id("employee_department_name")).clear();
+		 driver.findElement(By.id("employee_department_name")).sendKeys(createString(50));
+		 driver.findElement(By.id("create_department")).click();
+		 String warning=driver.findElement(By.cssSelector("ul.warning")).getText();
+		 verifyTextPresent(warning, "YOU CAN NOT ENTER MORE THAN 50 CHARACTER IN NAME");
+	 }
+
+	@Test
+	public void maximumLengthCode() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		driver.findElement(By.id("employee_department_name")).clear();
+		driver.findElement(By.id("employee_department_name")).sendKeys("New Department");
+		driver.findElement(By.id("employee_department_code")).clear();
+		driver.findElement(By.id("employee_department_code")).sendKeys(createString(50));
+		driver.findElement(By.id("create_department")).click();
+		String warning = driver.findElement(By.cssSelector("ul.warning")).getText();
+		verifyTextPresent(warning,"YOU CAN NOT ENTER MORE THAN 50 CHARACTER IN CODE");
+	}
+	
+	@Test
+	public void editEmployeeDepartment() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		String id = common.rowCountCheckOfDataTable("active-table", "id('active-table')/tbody/tr", "td", 4,"update-department-master-href","id",driver);
+		Thread.sleep(2000);
+		driver.findElement(By.id(id)).click();
+		driver.findElement(By.id("employee_department_name")).sendKeys(" Concatenate Department");
+		driver.findElement(By.id("update_department")).click();
+		String success = driver.findElement(By.cssSelector("ul.success")).getText();
+		verifyTextPresent(success,"DEPARTMENT WAS UPDATED SUCCESSFULLY.");
+	}
+	
+	@Test
+	public void deleteEmployeeDepartment() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		String id = common.rowCountCheckOfDataTable("active-table", "id('active-table')/tbody/tr", "td", 4,"delete-department-master-href","id",driver);
+		Thread.sleep(2000);
+		driver.findElement(By.id(id)).click();
+		Thread.sleep(1000);
+		driver.findElement(By.xpath(".//*[@id='modal']/div/div[1]/div[2]/button[1]")).click();
+		String class_name= common.returnClassName(driver);
+		String message = driver.findElement(By.className(class_name)).getText();
+		if (class_name == "success"){
+			verifyTextPresent(message, "DEPARTMENT WAS DELETED SUCCESSFULLY.");
+		}else{
+			assertTrue(common.verifyDependancyPresence(class_name,message,driver));
+		}
+	}
+	
+	@Test
+	public void duplicateDepartmentName() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		String id = common.rowCountCheckOfDataTable("active-table", "id('active-table')/tbody/tr", "td", 4,"update-department-master-href","id",driver);
+		String result  = common.returnIdValue(id);   
+		String duplicateName = driver.findElement(By.id("department_name_"+result)).getText();
+		driver.findElement(By.id("employee_department_name")).clear();
+		driver.findElement(By.id("employee_department_name")).sendKeys(duplicateName);
+		driver.findElement(By.id("employee_department_code")).clear();
+		driver.findElement(By.id("employee_department_code")).sendKeys("Prefix");
+		driver.findElement(By.id("create_department")).click();
+		String class_name= common.returnClassName(driver);
+		String message = driver.findElement(By.className(class_name)).getText();
+		assertTrue(common.verifyEquality(message, "THERE ARE ERRORS WHILE PROCESSING YOUR REQUEST\n"+
+												   "NAME : HAS ALREADY BEEN TAKEN"));
+	}
+	
+	@Test
+	public void duplicateCodeName() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		String id = common.rowCountCheckOfDataTable("active-table", "id('active-table')/tbody/tr", "td", 4,"update-department-master-href","id",driver);
+		String result  = common.returnIdValue(id);   
+		String duplicateCode = driver.findElement(By.id("department_code_"+result)).getText();
+		driver.findElement(By.id("employee_department_name")).clear();
+		driver.findElement(By.id("employee_department_name")).sendKeys(createString(2));
+		driver.findElement(By.id("employee_department_code")).clear();
+		driver.findElement(By.id("employee_department_code")).sendKeys(duplicateCode);
+		driver.findElement(By.id("create_department")).click();
+		String class_name= common.returnClassName(driver);
+		String message = driver.findElement(By.className(class_name)).getText();
+		assertTrue(common.verifyEquality(message, "THERE ARE ERRORS WHILE PROCESSING YOUR REQUEST\n"+
+												   "CODE : HAS ALREADY BEEN TAKEN"));
+	}
+
+	@Test
+	public void verifySpecialCharacterInName() throws Exception {
+		driver.findElement(By.linkText("HR Settings")).click();
+	    driver.findElement(By.linkText("Employee Department")).click();
+		driver.findElement(By.id("employee_department_name")).clear();
+		driver.findElement(By.id("employee_department_name")).sendKeys(createSpecialChars(5));
+		driver.findElement(By.id("employee_department_code")).clear();
+		driver.findElement(By.id("employee_department_code")).sendKeys(common.randomstring());
+		driver.findElement(By.id("create_department")).click();
+		String message = driver.findElement(By.className("warning")).getText();
+		verifyTextPresent(message, "SPECIAL CHARACTERS ARE NOT ALLOWED IN NAME");
+	}
+}
