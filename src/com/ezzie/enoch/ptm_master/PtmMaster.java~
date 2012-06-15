@@ -17,8 +17,11 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+<<<<<<< HEAD
 import com.ezzie.enoch.employee_category.Common;
-
+=======
+import com.ezzie.enoch.employee_categories.Common;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
 
 public class PtmMaster extends SeleniumBaseTest{
@@ -36,8 +39,13 @@ public class PtmMaster extends SeleniumBaseTest{
 
 	@After
 	public void tearDown() throws Exception {
+<<<<<<< HEAD
 		driver.findElement(By.linkText("LOGOUT")).click();	
 		super.tearDown();
+=======
+//		driver.findElement(By.linkText("LOGOUT")).click();	
+//		super.tearDown();
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 	}
 	
 	@Test

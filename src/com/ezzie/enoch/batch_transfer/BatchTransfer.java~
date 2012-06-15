@@ -14,14 +14,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
+<<<<<<< HEAD
 
 import com.ezzie.enoch.employee_category.Common;
-
+=======
+import com.ezzie.enoch.employee_categories.Common;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
 
 public class BatchTransfer extends SeleniumBaseTest{
 	Common common = new Common();
-
+<<<<<<< HEAD
+	
+=======
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 	@Before
 	public void setUp() throws Exception {
 		super.setUp();

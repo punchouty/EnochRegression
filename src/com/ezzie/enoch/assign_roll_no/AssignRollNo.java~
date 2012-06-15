@@ -4,14 +4,22 @@ import static org.junit.Assert.*;
 
 import java.util.Collections;
 import java.util.Comparator;
+<<<<<<< HEAD
 
-
+=======
+import java.util.HashSet;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+<<<<<<< HEAD
 
+=======
+import java.util.Random;
+import java.util.Set;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 
 import org.junit.After;
 import org.junit.Before;
@@ -22,8 +30,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import com.ezzie.enoch.employee_category.Common;
 
+<<<<<<< HEAD
+
+import com.ezzie.enoch.employee_category.Common;
+=======
+import com.ezzie.enoch.employee_categories.Common;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
 
 public class AssignRollNo extends SeleniumBaseTest{

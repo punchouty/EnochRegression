@@ -6,8 +6,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
+<<<<<<< HEAD
 
 import com.ezzie.enoch.employee_category.Common;
+=======
+import com.ezzie.enoch.employee_categories.Common;
+>>>>>>> 5925544c2bbc601bae05583ac44ff6e360f5e25f
 import com.ezzie.enoch.infrastructure.SeleniumBaseTest;
 
 public class AdditionalDetail extends SeleniumBaseTest{
